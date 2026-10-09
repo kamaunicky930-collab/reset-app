@@ -1,1 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d19">
+<title>RESET | Take Back Control</title>
 
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#080d19;
+color:#f5f7ff;
+line-height:1.6
+}
+header{
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #202a40
+}
+.logo{font-size:25px;font-weight:900;color:#71f5b3}
+.tag{color:#aab5ca;font-size:13px}
+main{max-width:850px;margin:auto;padding:28px 18px}
+.hero{text-align:center;padding:35px 0}
+.hero h1{font-size:clamp(35px,8vw,58px);line-height:1.1}
+.green{color:#71f5b3}
+.hero p{color:#aab5ca;max-width:500px;margin:18px auto}
+.card{
+background:#111a2b;
+border:1px solid #26334a;
+padding:22px;
+border-radius:18px;
+margin:18px 0
+}
+h2{margin-top:0;font-size:21px}
+input,select{
+width:100%;
+padding:13px;
+margin:8px 0 14px;
+border:1px solid #34425b;
+border-radius:10px;
+background:#080d19;
+color:white;
+font-size:16px
+}
+button{
+padding:12px 16px;
+border:0;
+border-radius:10px;
+background:#71f5b3;
+color:#08130f;
+font-weight:bold;
+font-size:15px;
+cursor:pointer
+}
+button.secondary{background:#26334a;color:white}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+.row button{flex:1}
+.muted{color:#aab5ca;font-size:14px}
+.task{
+display:flex;
+align-items:center;
+gap:10px;
+padding:10px 0;
+border-bottom:1px solid #26334a
+}
+.task input{width:20px;margin:0}
+.task.done span{text-decoration:line-through;color:#8b98ad}
+.timer{font-size:48px;font-weight:bold;text-align:center;margin:10px}
+footer{text-align:center;color:#8995aa;padding:25px;font-size:13px}
+@media(min-width:650px){
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">RESET.</div>
+<div class="tag">YOUR TIME. YOUR LIFE.</div>
+</header>
+
+<main>
+
+<section class="hero">
+<div class="tag">A NEW DAY. A NEW CHOICE.</div>
+<h1>Stop scrolling.<br><span class="green">Start living.</span></h1>
+<p>Build better habits, beat procrastination and take back control of your time. One small step at a time.</p>
+<button onclick="document.getElementById('taskInput').focus();document.getElementById('tasks').scrollIntoView({behavior:'smooth'})">Start my reset →</button>
+</section>
+
+<div class="columns">
+
+<section class="card">
+<h2>🎯 Your daily mission</h2>
+<label for="taskInput">What's one thing you want to finish?</label>
+<input id="taskInput" maxlength="100" placeholder="e.g. Study for 20 minutes">
+<button onclick="addTask()">+ Add mission</button>
+<div id="tasks"></div>
+<p class="muted">Your missions stay saved on this device.</p>
+</section>
+
+<section class="card">
+<h2>⏳ Focus timer</h2>
+<p class="muted">Put distractions aside and focus on one thing.</p>
+<div class="timer" id="timer">25:00</div>
+<div class="row">
+<button onclick="startTimer()">Start</button>
+<button class="secondary" onclick="pauseTimer()">Pause</button>
+<button class="secondary" onclick="resetTimer()">Reset</button>
+</div>
+<p class="muted" id="timerMessage" aria-live="polite">Ready when you are.</p>
+</section>
+
+</div>
+
+<section class="card">
+<h2>📵 Your screen-time intention</h2>
+<p class="muted">Choose a limit to remind yourself when it's time to step away.</p>
+
+<label for="appChoice">App or activity</label>
+<select id="appChoice">
+<option>Social media</option>
+<option>Gaming</option>
+<option>Video streaming</option>
+<option>Other distractions</option>
+</select>
+
+<label for="limitChoice">Daily intention</label>
+<select id="limitChoice">
+<option value="15">15 minutes</option>
+<option value="30" selected>30 minutes</option>
+<option value="60">1 hour</option>
+<option value="120">2 hours</option>
+</select>
+
+<button onclick="saveLimit()">Save my intention</button>
+<p id="limitMessage" class="muted" aria-live="polite">Small steps create lasting change.</p>
+</section>
+
+<section class="card">
+<h2>💚 Remember</h2>
+<p id="quote">You don't have to change your whole life today. Just make your next choice a good one.</p>
+<button class="secondary" onclick="newQuote()">Another reminder</button>
+</section>
+
+</main>
+
+<footer>RESET © 2026 · Progress, not perfection.</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+let seconds = 1500;
+let interval = null;
+let tasks = [];
+
+try {
+tasks = JSON.parse(localStorage.getItem('resetTasks') || '[]');
+if (!Array.isArray(tasks)) tasks = [];
+} catch(e) {
+tasks = [];
+}
+
+function saveTasks() {
+try {
+localStorage.setItem('resetTasks', JSON.stringify(tasks));
+} catch(e) {}
+}
+
+function renderTasks() {
+$('tasks').innerHTML = '';
+
+tasks.forEach((task,index) => {
+const label = document.createElement('label');
+label.className = 'task' + (task.done ? ' done' : '');
+
+const checkbox = document.createElement('input');
+checkbox.type = 'checkbox';
+checkbox.checked = task.done;
+
+checkbox.addEventListener('change',() => {
+tasks[index].done = checkbox.checked;
+saveTasks();
+renderTasks();
+});
+
+const span = document.createElement('span');
+span.textContent = task.text;
+
+const remove = document.createElement('button');
+remove.textContent = '×';
+remove.className = 'secondary';
+remove.setAttribute('aria-label','Remove mission');
+
+remove.onclick = () => {
+tasks.splice(index,1);
+saveTasks();
+renderTasks();
+};
+
+label.append(checkbox,span,remove);
+$('tasks').appendChild(label);
+});
+}
+
+function addTask() {
+const text = $('taskInput').value.trim();
+
+if(!text) {
+$('taskInput').focus();
+return;
+}
+
+tasks.push({text,done:false});
+saveTasks();
+renderTasks();
+$('taskInput').value = '';
+}
+
+function displayTimer() {
+$('timer').textContent =
+String(Math.floor(seconds/60)).padStart(2,'0') + ':' +
+String(seconds%60).padStart(2,'0');
+}
+
+function startTimer() {
+if(interval !== null) return;
+
+$('timerMessage').textContent = 'Focus on your mission. You can do this!';
+
+interval = setInterval(() => {
+if(seconds > 0) {
+seconds--;
+displayTimer();
+}
+
+if(seconds === 0) {
+clearInterval(interval);
+interval = null;
+$('timerMessage').textContent = 'Session complete! Take a short break.';
+}
+},1000);
+}
+
+function pauseTimer() {
+clearInterval(interval);
+interval = null;
+$('timerMessage').textContent = 'Paused. Resume whenever you are ready.';
+}
+
+function resetTimer() {
+pauseTimer();
+seconds = 1500;
+displayTimer();
+$('timerMessage').textContent = 'Fresh start. Ready when you are.';
+}
+
+function saveLimit() {
+const app = $('appChoice').value;
+const mins = $('limitChoice').value;
+
+$('limitMessage').textContent =
+'Your intention: ' + app +
+' for no more than ' + mins +
+' minutes a day. This is a reminder, not an automatic app blocker.';
+
+try {
+localStorage.setItem('resetLimit',JSON.stringify({app,mins}));
+} catch(e) {}
+}
+
+const quotes = [
+"You don't have to change your whole life today. Just make your next choice a good one.",
+"Progress, not perfection. Every focused minute counts.",
+"Your attention is valuable. Spend it on what matters to you.",
+"Start small. Keep showing up. Build the life you want.",
+"You are allowed to begin again, as many times as you need."
+];
+
+function newQuote() {
+const current = $('quote').textContent;
+let next = current;
+
+while(next === current) {
+next = quotes[Math.floor(Math.random()*quotes.length)];
+}
+
+$('quote').textContent = next;
+}
+
+renderTasks();
+displayTimer();
+</script>
+
+</body>
+</html>
