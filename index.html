@@ -263,30 +263,164 @@ $('missionForm').addEventListener('submit',e=>{
   $('missionInput').value='';save();
 });
 
-let remaining=1500, timerInterval=null;
-function showTimer(){
-  $('timer').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0');
-}
-$('startTimer').addEventListener('click',()=>{
-  if(timerInterval!==null)return;
-  $('timerStatus').textContent='One step at a time. Stay focused.';
-  timerInterval=setInterval(()=>{
-    remaining--;showTimer();
-    if(remaining<=0){
-      clearInterval(timerInterval);timerInterval=null;
-      $('timerStatus').textContent='Session complete! Take a short break.';
+rStatus').textContent='Session complete! Take a short break.';
     }
   },1000);
+
+// RESET focus timer — survives page refreshes
+const TIMER_KEY = 'resetFocusTimer';
+const FOCUS_SECONDS = 1500;
+
+let timerInterval = null;
+let timerState = read(TIMER_KEY, {
+  remaining: FOCUS_SECONDS,
+  endTime: null,
+  running: false
 });
-$('pauseTimer').addEventListener('click',()=>{
-  clearInterval(timerInterval);timerInterval=null;
-  $('timerStatus').textContent='Paused. Resume when ready.';
+
+if (!timerState || typeof timerState !== 'object') {
+  timerState = {
+    remaining: FOCUS_SECONDS,
+    endTime: null,
+    running: false
+  };
+}
+
+function getRemaining() {
+  if (timerState.running && timerState.endTime) {
+    return Math.max(
+      0,
+      Math.ceil((timerState.endTime - Date.now()) / 1000)
+    );
+  }
+
+  return Math.max(0, timerState.remaining || 0);
+}
+
+function saveTimer() {
+  write(TIMER_KEY, timerState);
+}
+
+function showTimer() {
+  const remaining = getRemaining();
+
+  $('timer').textContent =
+    String(Math.floor(remaining / 60)).padStart(2, '0') +
+    ':' +
+    String(remaining % 60).padStart(2, '0');
+}
+
+function stopTimerInterval() {
+  if (timerInterval !== null) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+}
+
+function updateTimer() {
+  const remaining = getRemaining();
+
+  timerState.remaining = remaining;
+
+  if (remaining <= 0) {
+    timerState.remaining = 0;
+    timerState.running = false;
+    timerState.endTime = null;
+
+    stopTimerInterval();
+    saveTimer();
+    showTimer();
+
+    $('timerStatus').textContent =
+      'Session complete! Take a short break.';
+
+    return;
+  }
+
+  showTimer();
+  saveTimer();
+}
+
+function startTimerInterval() {
+  stopTimerInterval();
+
+  timerInterval = setInterval(updateTimer, 250);
+}
+
+$('startTimer').addEventListener('click', () => {
+  if (timerState.running) return;
+
+  const remaining = getRemaining();
+
+  if (remaining <= 0) {
+    $('timerStatus').textContent =
+      'Session complete! Press Reset for a new session.';
+    return;
+  }
+
+  timerState.remaining = remaining;
+  timerState.endTime = Date.now() + remaining * 1000;
+  timerState.running = true;
+
+  saveTimer();
+
+  $('timerStatus').textContent =
+    'One step at a time. Stay focused.';
+
+  startTimerInterval();
+  showTimer();
 });
-$('resetTimer').addEventListener('click',()=>{
-  clearInterval(timerInterval);timerInterval=null;
-  remaining=1500;showTimer();
-  $('timerStatus').textContent='Ready for a fresh start.';
+
+$('pauseTimer').addEventListener('click', () => {
+  if (timerState.running) {
+    timerState.remaining = getRemaining();
+    timerState.running = false;
+    timerState.endTime = null;
+    saveTimer();
+  }
+
+  stopTimerInterval();
+  showTimer();
+
+  $('timerStatus').textContent = 'Paused. Resume when ready.';
 });
+
+$('resetTimer').addEventListener('click', () => {
+  stopTimerInterval();
+
+  timerState = {
+    remaining: FOCUS_SECONDS,
+    endTime: null,
+    running: false
+  };
+
+  saveTimer();
+  showTimer();
+
+  $('timerStatus').textContent = 'Ready for a fresh start.';
+});
+
+// Restore the correct state when the page loads.
+if (timerState.running) {
+  if (getRemaining() <= 0) {
+    timerState.remaining = 0;
+    timerState.running = false;
+    timerState.endTime = null;
+    saveTimer();
+
+    $('timerStatus').textContent =
+      'Session complete! Take a short break.';
+  } else {
+    $('timerStatus').textContent =
+      'Focus session running. Stay focused!';
+    startTimerInterval();
+  }
+} else {
+  $('timerStatus').textContent =
+    timerState.remaining === 0
+      ? 'Session complete! Press Reset for a new session.'
+      : 'Ready when you are.';
+
 
 const quotes=[
   "You don't need a perfect day. You need a beginning.",
