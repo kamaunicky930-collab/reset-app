@@ -2,348 +2,717 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080d19">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d18">
 <title>RESET — Take Back Control</title>
+
 <style>
 :root {
-  --bg:#080d19;
-  --card:#111a2b;
-  --border:#25334a;
-  --green:#71f5b3;
-  --muted:#9aa9c0;
-  --white:#f5f7ff;
+  --bg: #080d18;
+  --panel: #111a2b;
+  --panel2: #172238;
+  --green: #45f0a5;
+  --blue: #66a8ff;
+  --text: #f2f6ff;
+  --muted: #98a8c0;
+  --border: #26354d;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:var(--white);
-  font-family:Arial,sans-serif;line-height:1.6;
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
-header{
-  padding:20px 6%;display:flex;justify-content:space-between;
-  align-items:center;border-bottom:1px solid var(--border);
-  position:sticky;top:0;background:rgba(8,13,25,.95);
+header {
+  padding: 24px 18px;
+  border-bottom: 1px solid var(--border);
+  background: #0b1220;
 }
-.logo{font-size:25px;font-weight:900;color:var(--green)}
-.badge{font-size:12px;color:var(--green);border:1px solid #315944;padding:5px 10px;border-radius:20px}
-main{max-width:1050px;margin:auto;padding:25px 18px}
-.welcome{padding:24px 0}
-h1{font-size:clamp(30px,6vw,48px);line-height:1.15;margin:10px 0}
-h2{font-size:19px;margin-top:0}
-p{color:var(--muted)}
-.green{color:var(--green)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:16px;min-width:0}
-.stat{font-size:30px;font-weight:800;color:var(--green)}
-.small{font-size:13px;color:var(--muted)}
-button{
-  border:0;border-radius:10px;padding:11px 15px;
-  background:var(--green);color:#07150e;font-weight:800;
-  cursor:pointer;font-size:14px;
+.header-inner, main {
+  width: min(1050px, 100%);
+  margin: auto;
 }
-button.secondary{background:#26334a;color:white}
-button:focus,input:focus{outline:2px solid var(--green);outline-offset:2px}
-input{
-  width:100%;padding:12px;border-radius:10px;
-  border:1px solid var(--border);background:var(--bg);
-  color:white;margin:7px 0 12px;font-size:15px;
+.logo {
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: var(--green);
 }
-.row{display:flex;gap:8px;flex-wrap:wrap}
-.row button{flex:1}
-.progress{height:9px;background:#26334a;border-radius:20px;overflow:hidden;margin:12px 0}
-.progress div{height:100%;background:var(--green);width:0%;transition:width .3s}
-.item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
-.item:last-child{border-bottom:0}
-.item input{width:19px;height:19px;margin:0;flex-shrink:0}
-.item span{flex:1;overflow-wrap:anywhere}
-.item.done span{text-decoration:line-through;color:var(--muted)}
-.timer{font-size:52px;font-weight:900;text-align:center;margin:10px 0}
-footer{text-align:center;padding:30px;color:var(--muted);font-size:13px}
-@media(min-width:700px){
- .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
- .wide{grid-column:span 2}
- .timer-card{grid-row:span 2}
+.tagline {
+  color: var(--muted);
+  margin-top: 7px;
+  font-size: 13px;
 }
-@media(max-width:420px){
- .card{padding:15px}
- .stat{font-size:25px}
- header{padding:15px}
+main { padding: 20px 16px 45px; }
+h1 { font-size: clamp(25px, 5vw, 36px); margin-bottom: 8px; }
+h2 { font-size: 19px; margin-top: 0; }
+p { line-height: 1.5; }
+.muted { color: var(--muted); }
+.green { color: var(--green); }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 18px;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  padding: 19px;
+  min-width: 0;
+}
+.full { grid-column: 1 / -1; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+.stat {
+  padding: 15px 8px;
+  border-radius: 13px;
+  text-align: center;
+  background: var(--panel2);
+}
+.stat-number {
+  display: block;
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--green);
+}
+.stat-label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.progress {
+  height: 9px;
+  border-radius: 20px;
+  background: #28354a;
+  overflow: hidden;
+  margin-top: 12px;
+}
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #45f0a5, #66a8ff);
+  transition: width .25s;
+}
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 15px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  background: var(--green);
+  color: #07150f;
+}
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+button.secondary {
+  color: var(--text);
+  background: var(--panel2);
+  border: 1px solid var(--border);
+}
+button.danger {
+  color: #ffb7b7;
+  background: #3a202b;
+}
+button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.mission, .habit {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+}
+.mission:last-child, .habit:last-child { border-bottom: 0; }
+.mission input, .habit input {
+  width: 19px;
+  height: 19px;
+  accent-color: var(--green);
+  flex-shrink: 0;
+}
+.item-text { flex: 1; min-width: 0; }
+.item-title { font-weight: 700; font-size: 14px; }
+.item-sub { color: var(--muted); font-size: 12px; margin-top: 5px; }
+.done .item-title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+.reward {
+  color: var(--green);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.timer {
+  font-size: clamp(46px, 12vw, 67px);
+  text-align: center;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin: 18px 0;
+  font-variant-numeric: tabular-nums;
+}
+.timer-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  justify-content: center;
+}
+.timer-buttons button { flex: 1; min-width: 85px; }
+input[type="number"], input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 12px;
+  color: var(--text);
+  background: #0a1220;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+.quote {
+  color: var(--green);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+.small { font-size: 12px; }
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 20px;
+  font-size: 12px;
+}
+.notice { color: var(--muted); font-size: 12px; line-height: 1.6; }
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+  .full { grid-column: auto; }
+  .stats { gap: 7px; }
+  .stat-number { font-size: 22px; }
 }
 </style>
 </head>
-<body>
 
+<body>
 <header>
-  <div class="logo">RESET.</div>
-  <div class="badge">YOUR COMEBACK STARTS HERE</div>
+  <div class="header-inner">
+    <div class="logo">RESET<span style="color:white">.</span></div>
+    <div class="tagline">Break the cycle. Rebuild yourself. Take back control.</div>
+  </div>
 </header>
 
 <main>
-  <section class="welcome">
-    <div class="small">YOUR PERSONAL PROGRESS SPACE</div>
-    <h1>Become who you<br>want to <span class="green">be.</span></h1>
-    <p>Small steps. Real progress. One day at a time.</p>
-  </section>
+  <section>
+    <p class="muted" id="today"></p>
+    <h1>Welcome back. 👊</h1>
+    <p class="muted">You don't need to change your whole life today. Just win the next decision.</p>
 
-  <section class="grid">
-    <div class="card">
-      <div class="small">TOTAL XP</div>
-      <div class="stat" id="xp">0 XP</div>
-      <p class="small">Earn 10 XP for each completed mission.</p>
-    </div>
-    <div class="card">
-      <div class="small">MISSIONS DONE</div>
-      <div class="stat" id="completed">0</div>
-      <p class="small">Completed today</p>
-    </div>
-    <div class="card">
-      <div class="small">CURRENT LEVEL</div>
-      <div class="stat" id="level">1</div>
-      <p class="small" id="levelText">Every step counts.</p>
-    </div>
-
-    <section class="card wide">
-      <h2>🎯 Today's missions</h2>
-      <p>Choose a task you can realistically finish today.</p>
-      <form id="missionForm">
-        <input id="missionInput" maxlength="100" placeholder="e.g. Read for 20 minutes" required>
-        <button type="submit">+ Add mission</button>
-      </form>
-      <div class="progress"><div id="missionBar"></div></div>
-      <div id="missionList"></div>
-      <p class="small" id="missionProgress">Start with one small win.</p>
-    </section>
-
-    <section class="card timer-card">
-      <h2>⏱️ Focus room</h2>
-      <p>Give one thing your full attention.</p>
-      <div class="timer" id="timer">25:00</div>
-      <div class="row">
-        <button id="startTimer">Start</button>
-        <button class="secondary" id="pauseTimer">Pause</button>
-        <button class="secondary" id="resetTimer">Reset</button>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-number" id="streak">0 🔥</span>
+        <span class="stat-label">DAY STREAK</span>
       </div>
-      <p class="small" id="timerStatus" aria-live="polite">Ready when you are.</p>
-    </section>
+      <div class="stat">
+        <span class="stat-number" id="xp">0</span>
+        <span class="stat-label">TOTAL XP</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" id="level">1</span>
+        <span class="stat-label">YOUR LEVEL</span>
+      </div>
+    </div>
 
-    <section class="card">
-      <h2>🌱 Habit garden</h2>
-      <p>Check off the habits you practise today.</p>
-      <div id="habitList"></div>
-      <p class="small">Consistency matters more than perfection.</p>
-    </section>
-
-    <section class="card">
-      <h2>📵 Digital balance</h2>
-      <p>Set a personal goal for time spent on distractions.</p>
-      <label for="screenLimit" class="small">Daily intention (minutes)</label>
-      <input id="screenLimit" type="number" min="5" max="600" value="60">
-      <button id="saveLimit">Save intention</button>
-      <p class="small" id="limitStatus">Make space for what matters.</p>
-    </section>
-
-    <section class="card">
-      <h2>💚 Your daily reminder</h2>
-      <p id="quote">You don't need a perfect day. You need a beginning.</p>
-      <button class="secondary" id="newQuote">New reminder</button>
-    </section>
+    <div class="card" style="margin-top:15px">
+      <div class="row">
+        <strong id="levelLabel">Level 1</strong>
+        <span class="muted small" id="xpProgressText">0 / 100 XP</span>
+      </div>
+      <div class="progress"><div class="progress-bar" id="xpBar"></div></div>
+      <p class="muted small" id="streakMessage">Start today with one small win.</p>
+    </div>
   </section>
+
+  <div class="grid">
+    <section class="card">
+      <div class="row">
+        <h2>🎯 Daily Missions</h2>
+        <span class="reward" id="missionCount">0/4</span>
+      </div>
+      <p class="muted small">Complete your missions to earn XP.</p>
+      <div id="missions"></div>
+    </section>
+
+    <section class="card">
+      <h2>⏱️ Focus Timer</h2>
+      <p class="muted small">Give one task your full attention.</p>
+      <div class="timer" id="timer">25:00</div>
+      <div class="progress"><div class="progress-bar" id="timerBar"></div></div>
+      <div class="timer-buttons" style="margin-top:16px">
+        <button id="startBtn" onclick="startTimer()">Start</button>
+        <button class="secondary" onclick="pauseTimer()">Pause</button>
+        <button class="secondary" onclick="resetTimer()">Reset</button>
+      </div>
+      <p class="muted small" id="timerMessage" style="text-align:center;margin-top:14px">25 minutes. One goal. No distractions.</p>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <h2>🌱 Habit Garden</h2>
+        <span class="reward" id="habitCount">0/5</span>
+      </div>
+      <p class="muted small">Grow your habits one day at a time.</p>
+      <div id="habits"></div>
+    </section>
+
+    <section class="card">
+      <h2>📵 Digital Balance</h2>
+      <p class="muted">Set a daily intention for recreational screen time.</p>
+      <label for="screenGoal" class="small">My daily goal, in minutes</label>
+      <input id="screenGoal" type="number" min="1" max="1440" placeholder="e.g. 120">
+      <button onclick="saveScreenGoal()">Save my goal</button>
+      <p class="muted small" id="screenMessage">Choose a goal that works for you.</p>
+      <p class="notice">This is a personal tracking goal. A website cannot independently block other apps on your device.</p>
+    </section>
+
+    <section class="card full">
+      <h2>✨ Your Daily Reminder</h2>
+      <p class="quote" id="quote"></p>
+      <button class="secondary" onclick="newQuote()">New reminder ↻</button>
+    </section>
+
+    <section class="card full">
+      <h2>📈 Your Progress</h2>
+      <p id="progressSummary" class="muted">Every small win counts.</p>
+      <p class="notice">Your progress is saved in this browser on this device. Clearing browser data may erase it.</p>
+      <button class="secondary" onclick="exportProgress()">Export my progress</button>
+    </section>
+  </div>
 </main>
 
 <footer>RESET © 2026 · Progress, not perfection.</footer>
 
 <script>
-const $ = id => document.getElementById(id);
-const today = () => new Date().toLocaleDateString('en-CA');
+"use strict";
 
-function read(key, fallback) {
-  try {
-    const value = localStorage.getItem(key);
-    return value === null ? fallback : JSON.parse(value);
-  } catch(e) { return fallback; }
-}
-function write(key, value) {
-  try { localStorage.setItem(key, JSON.stringify(value)); }
-  catch(e) {}
-}
+const STORAGE_KEY = "resetV2";
+const EARNED_KEY = "resetV2Earned";
+const LIMIT_KEY = "resetV2Limit";
 
-let data = read('resetV2', {
-  day:today(), xp:0, missions:[], habits:{}, lastDay:'', streak:0
-});
-
-if (!data || typeof data !== 'object' || Array.isArray(data)) {
-  data = {day:today(),xp:0,missions:[],habits:{},lastDay:'',streak:0};
-}
-if (!Array.isArray(data.missions)) data.missions=[];
-if (!data.habits || typeof data.habits !== 'object') data.habits={};
-
-if (data.day !== today()) {
-  data.day=today();
-  data.missions=[];
-  data.habits={};
-}
-let earned = read('resetV2Earned', []);
-if (!Array.isArray(earned)) earned=[];
-
-const habits = [
-  ['water','Drink water']
-  ['move','Move your body'],
-  ['read','Read or learn'],
-  ['focus','Spend time focused'],
-  ['sleep','Prepare for good sleep']
+const missionList = [
+  { id: "focus", title: "Complete one focus session", sub: "Give yourself 25 minutes", xp: 20 },
+  { id: "move", title: "Move your body", sub: "Walk, stretch, dance or play", xp: 10 },
+  { id: "learn", title: "Learn something useful", sub: "Read or practise a skill", xp: 10 },
+  { id: "reflect", title: "Reflect on your day", sub: "Notice one thing you did well", xp: 10 }
 ];
 
-function save() {
-  write('resetV2',data);
-  render();
+const habitList = [
+  { id: "water", title: "Drink water regularly" },
+  { id: "sleep", title: "Keep a healthy sleep routine" },
+  { id: "movement", title: "Get some movement" },
+  { id: "learning", title: "Learn or read something" },
+  { id: "offline", title: "Spend time away from screens" }
+];
+
+const quotes = [
+  "You don't have to be perfect. You just have to keep showing up.",
+  "Your next decision is another chance to RESET.",
+  "Small actions repeated consistently create real change.",
+  "Discipline grows every time you keep a promise to yourself.",
+  "A difficult day does not erase your progress.",
+  "Focus on what you can do today, not everything at once.",
+  "Progress is built one choice at a time."
+];
+
+function localDay(date = new Date()) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
 }
 
-function render() {
-  $('xp').textContent=data.xp+' XP';
-  $('level').textContent=Math.floor(data.xp/100)+1;
-  $('levelText').textContent=(100-data.xp%100)+' XP to next level';
-
-  const done=data.missions.filter(m=>m.done).length;
-  $('completed').textContent=done;
-  $('missionBar').style.width=(data.missions.length ? done/data.missions.length*100 : 0)+'%';
-  $('missionProgress').textContent=data.missions.length
-    ? done+' of '+data.missions.length+' missions completed'
-    : 'Start with one small win.';
-
-  $('missionList').replaceChildren();
-  data.missions.forEach(m=>{
-    const row=document.createElement('label');
-    row.className='item'+(m.done?' done':'');
-    const check=document.createElement('input');
-    check.type='checkbox';check.checked=m.done;
-    check.addEventListener('change',()=>{
-      m.done=check.checked;
-      if(m.done && !earned.includes(m.id)){
-        data.xp+=10;earned.push(m.id);write('resetV2Earned',earned);
-      } else if(!m.done && earned.includes(m.id)){
-        data.xp=Math.max(0,data.xp-10);
-        earned=earned.filter(id=>id!==m.id);
-        write('resetV2Earned',earned);
-      }
-      save();
-    });
-    const text=document.createElement('span');text.textContent=m.text;
-    const del=document.createElement('button');
-    del.className='secondary';del.textContent='×';
-    del.setAttribute('aria-label','Delete mission');
-    del.addEventListener('click',()=>{
-      if(earned.includes(m.id)){
-        data.xp=Math.max(0,data.xp-10);
-        earned=earned.filter(id=>id!==m.id);
-        write('resetV2Earned',earned);
-      }
-      data.missions=data.missions.filter(x=>x.id!==m.id);save();
-    });
-    row.append(check,text,del);$('missionList').append(row);
-  });
-
-  $('habitList').replaceChildren();
-  habits.forEach(([id,label])=>{
-    const row=document.createElement('label');row.className='item';
-    const check=document.createElement('input');check.type='checkbox';
-    check.checked=!!data.habits[id];
-    check.addEventListener('change',()=>{
-      data.habits[id]=check.checked;save();
-    });
-    const text=document.createElement('span');text.textContent=label;
-    row.append(check,text);$('habitList').append(row);
-  });
+function previousDay(day) {
+  const [y, m, d] = day.split("-").map(Number);
+  const date = new Date(y, m - 1, d);
+  date.setDate(date.getDate() - 1);
+  return localDay(date);
 }
 
-$('missionForm').addEventListener('submit',e=>{
-  e.preventDefault();
-  const text=$('missionInput').value.trim();
-  if(!text)return;
-  data.missions.push({id:Date.now().toString()+Math.random().toString(16).slice(2),text,done:false});
-  $('missionInput').value='';save();
-});
-
-let remaining = 25 * 60;
-let timerInterval = null;
-
-function showTimer() {
-  const minutes = Math.floor(remaining / 60);
-  const seconds = remaining % 60;
-
-  $('timer').textContent =
-    String(minutes).padStart(2, '0') + ':' +
-    String(seconds).padStart(2, '0');
+function emptyDailyData() {
+  return {
+    missions: {},
+    habits: {}
+  };
 }
 
-$('startTimer').addEventListener('click', function () {
-  if (timerInterval !== null) return;
-
-  if (remaining <= 0) {
-    remaining = 25 * 60;
-    showTimer();
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (saved && typeof saved === "object") return saved;
+  } catch (e) {
+    console.warn("Could not read saved RESET progress.", e);
   }
 
-  $('timerStatus').textContent = 'Focus mode is on. Keep going!';
+  return {
+    day: localDay(),
+    xp: 0,
+    missions: {},
+    habits: {},
+    lastDay: "",
+    streak: 0
+  };
+}
 
-  timerInterval = setInterval(function () {
-    remaining--;
-    showTimer();
+let state = loadState();
+let today = localDay();
+let timerSeconds = 25 * 60;
+let timerInterval = null;
+let timerRunning = false;
+let focusSessionAwarded = false;
 
-    if (remaining <= 0) {
+function normaliseState() {
+  state.xp = Math.max(0, Number(state.xp) || 0);
+  state.streak = Math.max(0, Number(state.streak) || 0);
+  if (!state.missions || typeof state.missions !== "object") state.missions = {};
+  if (!state.habits || typeof state.habits !== "object") state.habits = {};
+  if (!state.day) state.day = today;
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    return true;
+  } catch (e) {
+    alert("RESET couldn't save your progress. Check your browser storage settings.");
+    return false;
+  }
+}
+
+function updateDailyStreak() {
+  today = localDay();
+
+  const lastDay = state.lastDay;
+
+  if (lastDay !== today) {
+    if (lastDay === previousDay(today)) {
+      state.streak += 1;
+    } else {
+      state.streak = 1;
+    }
+    state.lastDay = today;
+  }
+
+  // Keep the daily tasks fresh without erasing XP or streak history.
+  if (state.day !== today) {
+    state.day = today;
+    const fresh = emptyDailyData();
+    state.missions = fresh.missions;
+    state.habits = fresh.habits;
+  }
+
+  saveState();
+}
+
+function addXP(amount) {
+  state.xp += amount;
+  saveState();
+  renderStats();
+}
+
+function renderStats() {
+  const level = Math.floor(state.xp / 100) + 1;
+  const currentLevelXP = state.xp % 100;
+
+  document.getElementById("streak").textContent = state.streak + " 🔥";
+  document.getElementById("xp").textContent = state.xp;
+  document.getElementById("level").textContent = level;
+  document.getElementById("levelLabel").textContent = "Level " + level;
+  document.getElementById("xpProgressText").textContent = currentLevelXP + " / 100 XP";
+  document.getElementById("xpBar").style.width = currentLevelXP + "%";
+
+  let message = "Start today with one small win.";
+  if (state.streak >= 2) message = "You're building consistency. Keep going!";
+  if (state.streak >= 7) message = "One week of showing up. Keep building!";
+  if (state.streak >= 30) message = "Amazing consistency. Keep looking after yourself!";
+
+  document.getElementById("streakMessage").textContent = message;
+
+  const completedMissions = missionList.filter(m => state.missions[m.id]).length;
+  const completedHabits = habitList.filter(h => state.habits[h.id]).length;
+
+  document.getElementById("progressSummary").textContent =
+    `Today: ${completedMissions}/${missionList.length} missions and ` +
+    `${completedHabits}/${habitList.length} habits completed. ` +
+    `You've earned ${state.xp} XP overall.`;
+}
+
+function renderMissions() {
+  const container = document.getElementById("missions");
+  container.innerHTML = "";
+
+  missionList.forEach(mission => {
+    const done = Boolean(state.missions[mission.id]);
+    const label = document.createElement("label");
+    label.className = "mission" + (done ? " done" : "");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = done;
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked && !state.missions[mission.id]) {
+        state.missions[mission.id] = true;
+        addXP(mission.xp);
+      } else if (!checkbox.checked && state.missions[mission.id]) {
+        state.missions[mission.id] = false;
+        state.xp = Math.max(0, state.xp - mission.xp);
+      }
+
+      saveState();
+      renderAll();
+    });
+
+    const text = document.createElement("div");
+    text.className = "item-text";
+
+    const title = document.createElement("div");
+    title.className = "item-title";
+    title.textContent = mission.title;
+
+    const sub = document.createElement("div");
+    sub.className = "item-sub";
+    sub.textContent = mission.sub;
+
+    text.append(title, sub);
+
+    const reward = document.createElement("span");
+    reward.className = "reward";
+    reward.textContent = "+" + mission.xp + " XP";
+
+    label.append(checkbox, text, reward);
+    container.appendChild(label);
+  });
+
+  const count = missionList.filter(m => state.missions[m.id]).length;
+  document.getElementById("missionCount").textContent =
+    count + "/" + missionList.length;
+}
+
+function renderHabits() {
+  const container = document.getElementById("habits");
+  container.innerHTML = "";
+
+  habitList.forEach(habit => {
+    const done = Boolean(state.habits[habit.id]);
+    const label = document.createElement("label");
+    label.className = "habit" + (done ? " done" : "");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = done;
+
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked && !state.habits[habit.id]) {
+        state.habits[habit.id] = true;
+        addXP(5);
+      } else if (!checkbox.checked && state.habits[habit.id]) {
+        state.habits[habit.id] = false;
+        state.xp = Math.max(0, state.xp - 5);
+      }
+
+      saveState();
+      renderAll();
+    });
+
+    const text = document.createElement("span");
+    text.className = "item-text item-title";
+    text.textContent = habit.title;
+
+    label.append(checkbox, text);
+    container.appendChild(label);
+  });
+
+  const count = habitList.filter(h => state.habits[h.id]).length;
+  document.getElementById("habitCount").textContent =
+    count + "/" + habitList.length;
+}
+
+function renderAll() {
+  renderStats();
+  renderMissions();
+  renderHabits();
+}
+
+function updateDate() {
+  document.getElementById("today").textContent =
+    new Date().toLocaleDateString(undefined, {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+}
+
+function drawTimer() {
+  const mins = Math.floor(timerSeconds / 60);
+  const secs = timerSeconds % 60;
+
+  document.getElementById("timer").textContent =
+    String(mins).padStart(2, "0") + ":" + String(secs).padStart(2, "0");
+
+  document.getElementById("timerBar").style.width =
+    ((25 * 60 - timerSeconds) / (25 * 60) * 100) + "%";
+
+  document.getElementById("startBtn").textContent =
+    timerRunning ? "Running..." : "Start";
+}
+
+function startTimer() {
+  if (timerRunning) return;
+
+  if (timerSeconds <= 0) {
+    timerSeconds = 25 * 60;
+    focusSessionAwarded = false;
+  }
+
+  timerRunning = true;
+  document.getElementById("timerMessage").textContent = "Focus on one thing. You've got this!";
+  drawTimer();
+
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    drawTimer();
+
+    if (timerSeconds <= 0) {
       clearInterval(timerInterval);
       timerInterval = null;
-      $('timerStatus').textContent =
-        'Session complete! Take a short break.';
+      timerRunning = false;
+
+      document.getElementById("timerMessage").textContent =
+        "Focus session complete! Take a short break. 🎉";
+
+      if (!focusSessionAwarded) {
+        focusSessionAwarded = true;
+        state.missions.focus = true;
+        addXP(20);
+        saveState();
+        renderAll();
+      }
+
+      drawTimer();
     }
   }, 1000);
-});
+}
 
-$('pauseTimer').addEventListener('click', function () {
-  if (timerInterval !== null) {
-    clearInterval(timerInterval);
-    timerInterval = null;
-    $('timerStatus').textContent = 'Paused. Resume when ready.';
-  }
-});
+function pauseTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = null;
+  timerRunning = false;
+  document.getElementById("timerMessage").textContent = "Paused. Resume whenever you're ready.";
+  drawTimer();
+}
 
-$('resetTimer').addEventListener('click', function () {
-  if (timerInterval !== null) {
-    clearInterval(timerInterval);
-    timerInterval = null;
-  }
+function resetTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = null;
+  timerRunning = false;
+  timerSeconds = 25 * 60;
+  focusSessionAwarded = false;
+  document.getElementById("timerMessage").textContent =
+    "25 minutes. One goal. No distractions.";
+  drawTimer();
+}
 
-  remaining = 25 * 60;
-  showTimer();
-  $('timerStatus').textContent = 'Ready for a fresh start.';
-});
+function saveScreenGoal() {
+  const input = document.getElementById("screenGoal");
+  const value = Number(input.value);
 
-showTimer();
-const quotes=[
-  "You don't need a perfect day. You need a beginning.",
-  "Progress, not perfection. Keep showing up.",
-  "Your attention is valuable. Spend it wisely.",
-  "Small actions repeated over time can make a difference.",
-  "A setback doesn't erase the progress you've made."
-];
-$('newQuote').addEventListener('click',()=>{
-  const old=$('quote').textContent;
-  let next=old;
-  while(next===old)next=quotes[Math.floor(Math.random()*quotes.length)];
-  $('quote').textContent=next;
-});
-
-$('saveLimit').addEventListener('click',()=>{
-  const n=Number($('screenLimit').value);
-  if(!Number.isFinite(n)||n<5||n>600){
-    $('limitStatus').textContent='Choose a limit between 5 and 600 minutes.';
+  if (!Number.isInteger(value) || value < 1 || value > 1440) {
+    document.getElementById("screenMessage").textContent =
+      "Enter a number between 1 and 1440 minutes.";
     return;
   }
-  write('resetV2Limit',n);
-  $('limitStatus').textContent='Your daily intention is '+n+' minutes. This is a goal, not an automatic app blocker.';
-});
-$('screenLimit').value=read('resetV2Limit',60);
 
-render();showTimer();
+  try {
+    localStorage.setItem(LIMIT_KEY, String(value));
+    document.getElementById("screenMessage").textContent =
+      "Daily intention saved: " + value + " minutes. Keep checking in with yourself.";
+  } catch (e) {
+    document.getElementById("screenMessage").textContent =
+      "Couldn't save your goal in this browser.";
+  }
+}
+
+function loadScreenGoal() {
+  const saved = Number(localStorage.getItem(LIMIT_KEY));
+  if (saved > 0 && saved <= 1440) {
+    document.getElementById("screenGoal").value = saved;
+    document.getElementById("screenMessage").textContent =
+      "Your current daily intention is " + saved + " minutes.";
+  }
+}
+
+function newQuote() {
+  const quote = quotes[Math.floor(Math.random() * quotes.length)];
+  document.getElementById("quote").textContent = "“" + quote + "”";
+}
+
+function exportProgress() {
+  const data = {
+    exportedAt: new Date().toISOString(),
+    progress: state
+  };
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], {
+    type: "application/json"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "reset-progress.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function handleNewDay() {
+  const currentDay = localDay();
+
+  if (currentDay !== today) {
+    today = currentDay;
+    updateDailyStreak();
+    updateDate();
+    renderAll();
+  }
+}
+
+normaliseState();
+updateDailyStreak();
+updateDate();
+renderAll();
+drawTimer();
+newQuote();
+loadScreenGoal();
+
+// Check for a new day when the page remains open across midnight.
+setInterval(handleNewDay, 30000);
+
+// Re-check the date whenever the user returns to the browser tab.
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) handleNewDay();
+});
 </script>
 </body>
 </html>
