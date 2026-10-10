@@ -263,31 +263,61 @@ $('missionForm').addEventListener('submit',e=>{
   $('missionInput').value='';save();
 });
 
-let remaining=1500, timerInterval=null;
-function showTimer(){
-  $('timer').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0');
+let remaining = 25 * 60;
+let timerInterval = null;
+
+function showTimer() {
+  const minutes = Math.floor(remaining / 60);
+  const seconds = remaining % 60;
+
+  $('timer').textContent =
+    String(minutes).padStart(2, '0') + ':' +
+    String(seconds).padStart(2, '0');
 }
-$('startTimer').addEventListener('click',()=>{
-  if(timerInterval!==null)return;
-  $('timerStatus').textContent='One step at a time. Stay focused.';
-  timerInterval=setInterval(()=>{
-    remaining--;showTimer();
-    if(remaining<=0){
-      clearInterval(timerInterval);timerInterval=null;
-      $('timerStatus').textContent='Session complete! Take a short break.';
+
+$('startTimer').addEventListener('click', function () {
+  if (timerInterval !== null) return;
+
+  if (remaining <= 0) {
+    remaining = 25 * 60;
+    showTimer();
+  }
+
+  $('timerStatus').textContent = 'Focus mode is on. Keep going!';
+
+  timerInterval = setInterval(function () {
+    remaining--;
+    showTimer();
+
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      $('timerStatus').textContent =
+        'Session complete! Take a short break.';
     }
-  },1000);
-});
-$('pauseTimer').addEventListener('click',()=>{
-  clearInterval(timerInterval);timerInterval=null;
-  $('timerStatus').textContent='Paused. Resume when ready.';
-});
-$('resetTimer').addEventListener('click',()=>{
-  clearInterval(timerInterval);timerInterval=null;
-  remaining=1500;showTimer();
-  $('timerStatus').textContent='Ready for a fresh start.';
+  }, 1000);
 });
 
+$('pauseTimer').addEventListener('click', function () {
+  if (timerInterval !== null) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    $('timerStatus').textContent = 'Paused. Resume when ready.';
+  }
+});
+
+$('resetTimer').addEventListener('click', function () {
+  if (timerInterval !== null) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+
+  remaining = 25 * 60;
+  showTimer();
+  $('timerStatus').textContent = 'Ready for a fresh start.';
+});
+
+showTimer();
 const quotes=[
   "You don't need a perfect day. You need a beginning.",
   "Progress, not perfection. Keep showing up.",
