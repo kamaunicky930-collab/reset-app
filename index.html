@@ -3,467 +3,547 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1220">
-<title>RESET — Take Back Control</title>
+<meta name="theme-color" content="#080d18">
+<title>RESET | Your comeback starts here</title>
 <style>
-:root{--bg:#0b1220;--panel:#121d30;--green:#34d399;--text:#f3f7ff;--muted:#9aabc2;--border:#293952}
+:root{--bg:#080d18;--card:#111a2b;--card2:#19253a;--green:#54f0ad;--blue:#8ab4ff;--text:#f4f7ff;--muted:#96a6c0;--border:#26354d;--red:#ff8585}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;line-height:1.5}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;line-height:1.5}
 button,input{font:inherit}
-button{border:0;border-radius:10px;padding:11px 14px;font-weight:700;cursor:pointer}
-.primary{background:var(--green);color:#06251a}
-.secondary{background:#1c2b40;color:var(--text);border:1px solid var(--border)}
-header{max-width:950px;margin:auto;padding:18px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
-.logo{font-size:25px;font-weight:900;letter-spacing:2px}.logo span{color:var(--green)}
-main{max-width:950px;margin:22px auto;padding:0 14px 60px}
-h1{font-size:clamp(28px,6vw,40px);line-height:1.15;margin:6px 0}
-h2{font-size:19px;margin:0 0 8px}
-p{margin:6px 0}.muted,.small{color:var(--muted)}.small{font-size:12px}
-.hero{padding:20px 0}.eyebrow{color:var(--green);font-size:12px;font-weight:800;letter-spacing:2px}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:15px 0}
-.stat,.panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:16px;min-width:0}
-.stat{text-align:center;padding:13px 5px}.stat strong{display:block;font-size:24px}.stat span{font-size:12px;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.panel{margin-bottom:14px}.bar{height:9px;background:#293952;border-radius:20px;overflow:hidden;margin-top:12px}
-.bar div{height:100%;width:0;background:var(--green);transition:width .2s}
+button{border:0;cursor:pointer;font-weight:750;border-radius:12px;padding:11px 15px;transition:transform .15s}
+button:active{transform:scale(.97)}
+.primary{background:var(--green);color:#062318}
+.secondary{background:var(--card2);color:var(--text);border:1px solid var(--border)}
+header{max-width:1000px;margin:auto;padding:18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+.logo{font-size:26px;font-weight:950;letter-spacing:3px}.logo span{color:var(--green)}
+main{max-width:1000px;margin:auto;padding:18px 14px 90px}
+.hero{padding:25px 4px 18px}
+.tag{color:var(--green);font-weight:850;font-size:11px;letter-spacing:2px}
+h1{font-size:clamp(30px,7vw,48px);line-height:1.12;margin:9px 0}
+h2{font-size:19px;margin:0 0 5px}
+p{margin:5px 0}.muted,.small{color:var(--muted)}.small{font-size:12px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:15px 0}
+.stat,.panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px;min-width:0}
+.stat{text-align:center;padding:15px 4px}
+.stat strong{display:block;font-size:25px;color:var(--green)}
+.stat span{font-size:11px;color:var(--muted)}
+.progress{height:8px;background:var(--border);border-radius:20px;overflow:hidden;margin:12px 0 5px}
+.progress div{height:100%;width:0;background:var(--green);transition:width .2s}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.panel{margin-bottom:14px}
+.panel-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px}
+.pill{background:#17382f;color:var(--green);border-radius:30px;padding:4px 9px;font-size:11px;font-weight:800;white-space:nowrap}
 .item{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:1px solid var(--border)}
-.item:last-child{border-bottom:0}.item input{width:19px;height:19px;accent-color:var(--green);margin-top:3px;flex-shrink:0}
-.item label{flex:1;cursor:pointer}.item strong{display:block;font-size:14px}.item small{color:var(--muted);font-size:12px}
-.reward{font-size:12px;color:var(--green);white-space:nowrap}
-.timer{text-align:center;font-size:clamp(45px,12vw,68px);font-weight:900;font-variant-numeric:tabular-nums;margin:16px 0}
-.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.item:last-child{border-bottom:0}
+.item input{width:19px;height:19px;margin-top:3px;accent-color:var(--green);flex-shrink:0}
+.item label{flex:1;cursor:pointer}
+.item strong{display:block;font-size:14px}
+.item small{display:block;color:var(--muted);font-size:12px}
+.reward{color:var(--green);font-size:12px;white-space:nowrap}
+.timer{text-align:center;font-size:clamp(50px,13vw,76px);font-weight:900;letter-spacing:2px;font-variant-numeric:tabular-nums;margin:14px 0}
 .center{text-align:center}
-input[type=number],input[type=text]{width:100%;padding:11px;border-radius:9px;border:1px solid var(--border);background:var(--bg);color:var(--text);margin:7px 0}
-.quote{font-style:italic;color:#c5d4e9}
-footer{text-align:center;color:var(--muted);padding:20px;font-size:12px}
-#helpButton{position:fixed;right:17px;bottom:17px;width:52px;height:52px;border-radius:50%;font-size:22px;z-index:10}
-#toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--green);color:#06251a;padding:10px 15px;border-radius:10px;display:none;z-index:30;max-width:90%}
-.overlay{position:fixed;inset:0;background:#030812ed;z-index:50;display:none;align-items:center;justify-content:center;padding:16px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.actions button{flex:1}
+input[type=number],input[type=text]{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:12px;border-radius:10px;margin:8px 0}
+.quote{font-size:17px;font-weight:650}
+#helpButton{position:fixed;right:17px;bottom:18px;width:54px;height:54px;border-radius:50%;font-size:23px;z-index:20;box-shadow:0 5px 24px #0008}
+#toast{position:fixed;left:50%;bottom:85px;transform:translateX(-50%);background:var(--green);color:#062318;padding:12px 17px;border-radius:12px;z-index:40;display:none;width:max-content;max-width:90%;font-weight:750}
+.overlay{position:fixed;inset:0;background:#030711ed;z-index:50;display:none;align-items:center;justify-content:center;padding:16px}
 .overlay.show{display:flex}
-.modal{width:min(100%,440px);max-height:85vh;overflow:auto;background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:22px}
-.tutorial-progress{display:flex;gap:5px;margin:15px 0}
-.tutorial-progress span{height:5px;flex:1;border-radius:5px;background:var(--border)}
-.tutorial-progress span.active{background:var(--green)}
-#tutorialText{min-height:75px;color:#c5d4e9}
-@media(max-width:580px){.grid{grid-template-columns:1fr;gap:0}.panel{padding:15px}}
+.modal{width:min(100%,440px);background:var(--card);border:1px solid var(--border);border-radius:22px;padding:23px}
+.dots{display:flex;gap:5px;margin:17px 0}
+.dots span{height:5px;background:var(--border);border-radius:9px;flex:1}
+.dots .active{background:var(--green)}
+#guideText{min-height:90px;color:#c2cde0}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px 0}
+@media(max-width:600px){.grid{grid-template-columns:1fr;gap:0}.panel{padding:15px}.hero{padding-top:20px}}
 </style>
 </head>
 <body>
 <header>
-<div><div class="logo">RE<span>SET</span></div><div class="small">Small steps. Real change.</div></div>
-<button class="secondary" id="headerHelp">? Help</button>
+  <div>
+    <div class="logo">RE<span>SET</span></div>
+    <div class="small">Your comeback starts here.</div>
+  </div>
+  <button class="secondary" id="helpTop">? Help</button>
 </header>
 
 <main>
-<section class="hero">
-<div class="eyebrow">YOUR PERSONAL COMEBACK</div>
-<h1>Take back control.</h1>
-<p class="muted">Build better habits, focus, and keep moving forward.</p>
-<p class="small" id="todayLabel"></p>
-</section>
+  <section class="hero">
+    <div class="tag">ONE DAY AT A TIME</div>
+    <h1>Become who<br>you want to be.</h1>
+    <p class="muted">Build discipline. Protect your focus. Keep your promises to yourself.</p>
+    <p class="small" id="dateText"></p>
+  </section>
 
-<section class="stats">
-<div class="stat"><strong id="xp">0</strong><span>Total XP</span></div>
-<div class="stat"><strong id="level">1</strong><span>Level</span></div>
-<div class="stat"><strong id="streak">0 🔥</strong><span>Day streak</span></div>
-</section>
+  <section class="stats">
+    <div class="stat"><strong id="xp">0</strong><span>TOTAL XP</span></div>
+    <div class="stat"><strong id="level">1</strong><span>YOUR LEVEL</span></div>
+    <div class="stat"><strong id="streak">0 🔥</strong><span>DAY STREAK</span></div>
+  </section>
 
-<section class="panel">
-<h2 id="levelTitle">Level 1 — Beginner</h2>
-<p class="muted" id="levelText">0 / 100 XP to next level</p>
-<div class="bar"><div id="levelBar"></div></div>
-</section>
+  <section class="panel">
+    <div class="panel-head">
+      <div>
+        <h2 id="levelName">Level 1 · Beginner</h2>
+        <p class="small" id="levelProgress">0 / 100 XP to next level</p>
+      </div>
+      <span class="pill" id="rank">BEGINNER</span>
+    </div>
+    <div class="progress"><div id="levelBar"></div></div>
+  </section>
 
-<div class="grid">
-<section class="panel">
-<h2>🎯 Daily Missions</h2>
-<p class="muted">Complete challenges to earn XP.</p>
-<div id="missions"></div>
-<p class="small" id="missionCount"></p>
-</section>
-<section class="panel">
-<h2>🌱 Habit Garden</h2>
-<p class="muted">Each completed habit earns 5 XP.</p>
-<div id="habits"></div>
-<p class="small" id="habitCount"></p>
-</section>
-</div>
+  <div class="grid">
+    <section class="panel">
+      <div class="panel-head">
+        <h2>🎯 Daily Missions</h2>
+        <span class="pill" id="missionBadge">0/4</span>
+      </div>
+      <p class="small">Complete challenges and earn XP.</p>
+      <div id="missions"></div>
+    </section>
 
-<section class="panel">
-<h2>⏱️ Focus Timer</h2>
-<p class="muted">Focus on one task for 25 minutes.</p>
-<div class="timer" id="timer">25:00</div>
-<p class="center muted" id="timerStatus">Ready when you are.</p>
-<div class="actions" style="justify-content:center">
-<button class="primary" id="startTimer">Start</button>
-<button class="secondary" id="pauseTimer">Pause</button>
-<button class="secondary" id="resetTimer">Reset</button>
-</div>
-</section>
+    <section class="panel">
+      <div class="panel-head">
+        <h2>🌱 Habit Garden</h2>
+        <span class="pill" id="habitBadge">0/5</span>
+      </div>
+      <p class="small">Small habits make a big difference.</p>
+      <div id="habits"></div>
+    </section>
+  </div>
 
-<section class="panel">
-<h2>📵 Digital Balance</h2>
-<p class="muted">Set a daily screen-time goal. RESET cannot directly block other apps.</p>
-<label for="screenGoal" class="small">Goal in minutes</label>
-<input id="screenGoal" type="number" min="1" max="1440" value="120">
-<button class="primary" id="saveGoal">Save goal</button>
-<p class="small" id="goalStatus"></p>
-</section>
+  <section class="panel">
+    <div class="panel-head">
+      <h2>⏱️ Focus Room</h2>
+      <span class="pill">25 MIN</span>
+    </div>
+    <p class="muted">Put distractions aside and focus on one thing.</p>
+    <div class="timer" id="timer">25:00</div>
+    <p class="center small" id="timerStatus">Ready for your first session?</p>
+    <div class="actions">
+      <button class="primary" id="start">Start focus</button>
+      <button class="secondary" id="pause">Pause</button>
+      <button class="secondary" id="reset">Reset</button>
+    </div>
+  </section>
 
-<section class="panel">
-<h2>🔔 Daily Reminder</h2>
-<label for="reminderTime" class="small">Reminder time (24-hour format)</label>
-<input id="reminderTime" type="text" placeholder="20:00" value="20:00">
-<div class="actions">
-<button class="primary" id="enableReminders">Enable reminders</button>
-<button class="secondary" id="disableReminders">Disable</button>
-</div>
-<p class="small" id="reminderStatus">Reminders are off.</p>
-</section>
+  <section class="panel">
+    <h2>📵 Digital Balance</h2>
+    <p class="muted">Choose a daily screen-time goal for yourself.</p>
+    <label class="small" for="goalInput">Daily goal in minutes</label>
+    <input id="goalInput" type="number" min="1" max="1440" value="120">
+    <button class="primary" id="saveGoal">Save my goal</button>
+    <p class="small" id="goalStatus"></p>
+  </section>
 
-<section class="panel">
-<h2>💭 Daily Thought</h2>
-<p class="quote" id="quote">You don't need to be perfect. Keep showing up.</p>
-<button class="secondary" id="newQuote">Another thought</button>
-</section>
+  <section class="panel">
+    <h2>💭 A thought for today</h2>
+    <p class="quote" id="quote">You don't need a perfect day. You need a next step.</p>
+    <button class="secondary" id="newQuote">New thought</button>
+  </section>
 
-<section class="panel">
-<h2>💾 Progress Backup</h2>
-<p class="muted">Download a backup of your progress.</p>
-<div class="actions">
-<button class="primary" id="exportData">Export progress</button>
-<button class="secondary" id="importButton">Restore backup</button>
-<input type="file" id="importFile" accept=".json,application/json" hidden>
-</div>
-<p class="small">Progress is saved in this browser. Keep backups safe.</p>
-<p class="small" id="saveStatus">Checking storage...</p>
-</section>
-<footer>RESET · Progress over perfection.</footer>
+  <section class="panel">
+    <h2>💾 Your Progress</h2>
+    <p class="muted">Your progress is saved automatically in this browser.</p>
+    <div class="actions">
+      <button class="primary" id="backup">Download backup</button>
+      <button class="secondary" id="restore">Restore backup</button>
+      <input type="file" id="backupFile" accept=".json,application/json" hidden>
+    </div>
+    <p class="small" id="saveStatus">Loading saved progress...</p>
+  </section>
+
+  <footer>RESET · Progress, not perfection.</footer>
 </main>
 
-<button id="helpButton" class="primary" aria-label="Open tutorial">?</button>
+<button id="helpButton" class="primary" aria-label="Open RESET tutorial">?</button>
 <div id="toast" role="status" aria-live="polite"></div>
 
-<div class="overlay" id="tutorialOverlay" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle">
-<div class="modal">
-<p class="small" id="tutorialStep">RESET GUIDE</p>
-<div class="tutorial-progress" id="tutorialProgress"></div>
-<div id="tutorialEmoji" style="font-size:38px">👋</div>
-<h2 id="tutorialTitle">Welcome to RESET!</h2>
-<p id="tutorialText"></p>
-<div class="actions">
-<button class="secondary" id="skipTutorial">Close</button>
-<button class="secondary" id="backTutorial">Back</button>
-<button class="primary" id="nextTutorial">Next</button>
-</div>
-</div>
+<div class="overlay" id="guide" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+  <div class="modal">
+    <p class="tag" id="guideStep">RESET STARTER GUIDE</p>
+    <div class="dots" id="guideDots"></div>
+    <div id="guideEmoji" style="font-size:40px">👋</div>
+    <h2 id="guideTitle">Welcome to RESET!</h2>
+    <p id="guideText"></p>
+    <div class="actions">
+      <button class="secondary" id="guideClose">Close</button>
+      <button class="secondary" id="guideBack">Back</button>
+      <button class="primary" id="guideNext">Next</button>
+    </div>
+  </div>
 </div>
 
 <script>
-"use strict";
 (function(){
-const KEY="resetV2";
-const GOAL_KEY="resetV2Goal";
-const REMINDER_KEY="resetV2Reminder";
-const TUTORIAL_KEY="resetTutorialCompletedV1";
-
-const missionDefs=[
-{id:"focus",title:"Complete a focus session",detail:"Finish one 25-minute session.",xp:20},
-{id:"move",title:"Move your body",detail:"Walk, stretch, or exercise comfortably.",xp:10},
-{id:"learn",title:"Learn something new",detail:"Read or practise a skill.",xp:10},
-{id:"reflect",title:"Reflect on your day",detail:"Think about what went well.",xp:10}
-];
-const habitDefs=[
-{id:"water",title:"Drink water"},
-{id:"read",title:"Read or learn"},
-{id:"exercise",title:"Move your body"},
-{id:"mindful",title:"Take a mindful break"},
-{id:"sleep",title:"Prepare for good sleep"}
-];
-const quotes=[
-"You don't need to be perfect. Keep showing up.",
-"Small steps taken consistently create change.",
-"Protect your attention. It shapes your day.",
-"Focus on the next good decision.",
-"A difficult day doesn't erase your progress.",
-"You can always begin again."
-];
-const steps=[
-{emoji:"👋",title:"Welcome to RESET!",text:"RESET helps you build better habits, focus on your goals, and make progress one day at a time."},
-{emoji:"⭐",title:"Earn XP and level up",text:"Missions and habits earn XP. Every 100 XP advances you one level. Unticking a completed item removes its XP."},
-{emoji:"🎯",title:"Daily Missions",text:"Complete four challenges worth 20, 10, 10 and 10 XP. Missions reset each new day."},
-{emoji:"🌱",title:"Habit Garden",text:"Tick any of the five habits to earn 5 XP. Your habits and XP are saved when you refresh."},
-{emoji:"⏱️",title:"Focus and streaks",text:"The focus timer remembers its remaining time after refreshing. Your streak increases on days when you complete an activity."},
-{emoji:"💾",title:"Save your progress",text:"RESET saves progress in this browser. Export a backup to keep a copy. Tap Help anytime to reopen this guide."}
-];
+"use strict";
 
 const $=id=>document.getElementById(id);
-function todayKey(d=new Date()){
-return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const STORAGE="reset_complete_v3";
+const TUTORIAL="reset_guide_seen_v3";
+
+const missions=[
+{id:"focus",name:"Complete a focus session",desc:"Finish one 25-minute timer.",xp:20},
+{id:"move",name:"Move your body",desc:"Walk, stretch, or exercise.",xp:10},
+{id:"learn",name:"Learn something",desc:"Read or practise a skill.",xp:10},
+{id:"reflect",name:"Reflect on today",desc:"Think about one thing you learned.",xp:10}
+];
+const habits=[
+{id:"water",name:"Drink water"},
+{id:"reading",name:"Read or learn"},
+{id:"movement",name:"Move your body"},
+{id:"mindful",name:"Take a mindful break"},
+{id:"sleep",name:"Prepare for sleep"}
+];
+const thoughts=[
+"You don't need a perfect day. You need a next step.",
+"Small actions, repeated daily, create real progress.",
+"Your attention is valuable. Spend it wisely.",
+"Start where you are. Use what you have.",
+"A setback is a moment, not your whole story.",
+"Consistency beats waiting for motivation."
+];
+const guideSteps=[
+["👋","Welcome to RESET","This is your space to build habits, improve your focus, and work towards your goals one day at a time."],
+["⭐","XP and levels","Complete missions and habits to earn XP. Every 100 XP takes you to the next level."],
+["🎯","Daily missions","Complete the four challenges to earn XP. Your daily checklist refreshes on a new calendar day."],
+["🌱","Habit Garden","Tick a habit to earn 5 XP. Untick it to remove those 5 XP. Your current checklist is saved."],
+["⏱️","Focus Room","Start a 25-minute session. The timer continues counting accurately even if you refresh the page."],
+["💾","Your progress","RESET saves progress in this browser. Use Download backup to keep a copy. Tap the ? button whenever you need this guide again."]
+];
+
+function dateKey(date=new Date()){
+return date.getFullYear()+"-"+String(date.getMonth()+1).padStart(2,"0")+"-"+String(date.getDate()).padStart(2,"0");
 }
-function dayBefore(key){
+function previousDay(key){
 const p=key.split("-").map(Number);
 const d=new Date(p[0],p[1]-1,p[2]);
 d.setDate(d.getDate()-1);
-return todayKey(d);
+return dateKey(d);
 }
-function blankChecks(defs){
-const o={};defs.forEach(x=>o[x.id]=false);return o;
+function emptyChecks(items){
+const out={};
+items.forEach(x=>out[x.id]=false);
+return out;
 }
-function blankState(){
-return {version:2,xp:0,streak:0,lastActiveDate:"",day:todayKey(),missions:blankChecks(missionDefs),habits:blankChecks(habitDefs),timerRemaining:1500,timerRunning:false,timerEnd:0};
+function freshState(){
+return {
+xp:0,streak:0,lastActive:"",day:dateKey(),
+missions:emptyChecks(missions),habits:emptyChecks(habits),
+timerSeconds:1500,timerRunning:false,timerEnd:0,goal:120
+};
 }
-let state=blankState(),goal=120,reminderTime="20:00",remindersEnabled=false;
-let timerInterval=null,toastTimeout=null,tutorialIndex=0;
+let state=freshState();
+let interval=null;
+let toastTimer=null;
+let guideIndex=0;
 
-function readJSON(key){
-try{return JSON.parse(localStorage.getItem(key));}catch(e){return null;}
-}
 function save(){
 try{
-localStorage.setItem(KEY,JSON.stringify(state));
-localStorage.setItem(GOAL_KEY,String(goal));
-localStorage.setItem(REMINDER_KEY,JSON.stringify({time:reminderTime,enabled:remindersEnabled}));
+localStorage.setItem(STORAGE,JSON.stringify(state));
 $("saveStatus").textContent="✓ Progress saved on this device.";
 return true;
 }catch(e){
-$("saveStatus").textContent="Storage unavailable. Export your data if possible.";
+$("saveStatus").textContent="Could not save. Please check browser storage.";
 return false;
 }
 }
 function load(){
 try{
-const old=readJSON(KEY);
-if(old&&typeof old==="object"){
-state={...blankState(),...old};
+const raw=localStorage.getItem(STORAGE);
+if(raw){
+const data=JSON.parse(raw);
+if(data&&typeof data==="object"){
+state={...freshState(),...data};
 state.xp=Math.max(0,Number(state.xp)||0);
 state.streak=Math.max(0,Number(state.streak)||0);
-if(!state.missions||typeof state.missions!=="object")state.missions=blankChecks(missionDefs);
-if(!state.habits||typeof state.habits!=="object")state.habits=blankChecks(habitDefs);
-missionDefs.forEach(x=>state.missions[x.id]=Boolean(state.missions[x.id]));
-habitDefs.forEach(x=>state.habits[x.id]=Boolean(state.habits[x.id]));
+state.missions={...emptyChecks(missions),...(data.missions||{})};
+state.habits={...emptyChecks(habits),...(data.habits||{})};
+state.goal=Math.max(1,Math.min(1440,Number(state.goal)||120));
+state.timerSeconds=Math.max(0,Math.min(1500,Number(state.timerSeconds)||0));
 }
-const g=Number(localStorage.getItem(GOAL_KEY));
-if(Number.isFinite(g)&&g>=1&&g<=1440)goal=g;
-const r=readJSON(REMINDER_KEY);
-if(r){if(typeof r.time==="string")reminderTime=r.time;remindersEnabled=Boolean(r.enabled);}
-}catch(e){$("saveStatus").textContent="Browser storage could not be read.";}
 }
-function toast(message){
-$("toast").textContent=message;$("toast").style.display="block";
-clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>$("toast").style.display="none",2300);
+}catch(e){
+$("saveStatus").textContent="Saved data could not be read.";
 }
-function activity(){
-const t=todayKey();
-if(state.lastActiveDate!==t){
-state.streak=state.lastActiveDate===dayBefore(t)?state.streak+1:1;
-state.lastActiveDate=t;
 }
+function notify(message){
+$("toast").textContent=message;
+$("toast").style.display="block";
+clearTimeout(toastTimer);
+toastTimer=setTimeout(()=>$("toast").style.display="none",2400);
+}
+function markActivity(){
+const today=dateKey();
+if(state.lastActive!==today){
+state.streak=state.lastActive===previousDay(today)?state.streak+1:1;
+state.lastActive=today;
+}
+}
+function award(points){
+state.xp=Math.max(0,state.xp+points);
+if(points>0)markActivity();
 save();
-}
-function changeXP(amount){
-state.xp=Math.max(0,state.xp+amount);
-if(amount>0)activity();else save();
 renderStats();
 }
-function dailyReset(){
-const t=todayKey();
-if(state.day!==t){
-state.day=t;
-state.missions=blankChecks(missionDefs);
-state.habits=blankChecks(habitDefs);
-if(state.lastActiveDate&&state.lastActiveDate!==t&&state.lastActiveDate!==dayBefore(t))state.streak=0;
+function newDayCheck(){
+const today=dateKey();
+if(state.day!==today){
+state.day=today;
+state.missions=emptyChecks(missions);
+state.habits=emptyChecks(habits);
+if(state.lastActive&&state.lastActive!==today&&state.lastActive!==previousDay(today)){
+state.streak=0;
+}
 save();
 }
 }
 function renderStats(){
-const lvl=Math.floor(state.xp/100)+1;
-const rem=state.xp%100;
-let name="Beginner";
-if(lvl>=20)name="Legend";else if(lvl>=10)name="Unstoppable";else if(lvl>=5)name="Disciplined";else if(lvl>=3)name="Rising";
+const level=Math.floor(state.xp/100)+1;
+const progress=state.xp%100;
+let rank="BEGINNER";
+if(level>=20)rank="LEGEND";
+else if(level>=10)rank="ELITE";
+else if(level>=5)rank="DISCIPLINED";
+else if(level>=3)rank="RISING";
 $("xp").textContent=state.xp;
-$("level").textContent=lvl;
+$("level").textContent=level;
 $("streak").textContent=state.streak+" 🔥";
-$("levelTitle").textContent="Level "+lvl+" — "+name;
-$("levelText").textContent=rem+" / 100 XP to next level";
-$("levelBar").style.width=rem+"%";
+$("rank").textContent=rank;
+$("levelName").textContent="Level "+level+" · "+rank.charAt(0)+rank.slice(1).toLowerCase();
+$("levelProgress").textContent=progress+" / 100 XP to next level";
+$("levelBar").style.width=progress+"%";
 }
-function renderChecks(containerId,defs,checks,type){
-const container=$(containerId);container.replaceChildren();
-defs.forEach(item=>{
-const row=document.createElement("div");row.className="item";
-const box=document.createElement("input");
-box.type="checkbox";box.checked=Boolean(checks[item.id]);
-box.id=type+"-"+item.id;box.setAttribute("aria-label",item.title);
-const label=document.createElement("label");label.htmlFor=box.id;
-const strong=document.createElement("strong");strong.textContent=item.title;
-const detail=document.createElement("small");detail.textContent=item.detail||"A small win for today.";
-label.append(strong,detail);
-const reward=document.createElement("span");reward.className="reward";reward.textContent="+"+item.xp+" XP";
-box.addEventListener("change",()=>{
-const was=Boolean(checks[item.id]);
-if(box.checked===was)return;
-checks[item.id]=box.checked;
-changeXP(box.checked?item.xp:-item.xp);
-renderAll();
+function renderList(container,items,checks,type,points){
+const root=$(container);
+root.replaceChildren();
+items.forEach(item=>{
+const row=document.createElement("div");
+row.className="item";
+const checkbox=document.createElement("input");
+checkbox.type="checkbox";
+checkbox.id=type+"_"+item.id;
+checkbox.checked=Boolean(checks[item.id]);
+const label=document.createElement("label");
+label.htmlFor=checkbox.id;
+const title=document.createElement("strong");
+title.textContent=item.name;
+const desc=document.createElement("small");
+desc.textContent=item.desc||"One small step today.";
+label.append(title,desc);
+const reward=document.createElement("span");
+reward.className="reward";
+reward.textContent="+"+points+" XP";
+checkbox.addEventListener("change",()=>{
+checks[item.id]=checkbox.checked;
+award(checkbox.checked?points:-points);
+renderLists();
 });
-row.append(box,label,reward);container.append(row);
+row.append(checkbox,label,reward);
+root.append(row);
 });
 }
-function renderAll(){
+function renderLists(){
+renderList("missions",missions,state.missions,"mission",0);
+renderList("habits",habits.map(h=>({...h,desc:"Build consistency, one day at a time."})),state.habits,"habit",5);
+const missionRows=$("missions").querySelectorAll(".item");
+missions.forEach((m,i)=>{
+const reward=missionRows[i]?.querySelector(".reward");
+if(reward)reward.textContent="+"+m.xp+" XP";
+});
+$("missionBadge").textContent=missions.filter(m=>state.missions[m.id]).length+"/"+missions.length;
+$("habitBadge").textContent=habits.filter(h=>state.habits[h.id]).length+"/"+habits.length;
+}
+function render(){
 renderStats();
-renderChecks("missions",missionDefs,state.missions,"mission");
-renderChecks("habits",habitDefs.map(x=>({...x,detail:"Build consistency one day at a time.",xp:5})),state.habits,"habit");
-$("missionCount").textContent=Object.values(state.missions).filter(Boolean).length+" of "+missionDefs.length+" completed";
-$("habitCount").textContent=Object.values(state.habits).filter(Boolean).length+" of "+habitDefs.length+" habits completed";
+renderLists();
+$("goalInput").value=state.goal;
+$("goalStatus").textContent="Your daily target is "+state.goal+" minutes.";
 }
-function fmt(seconds){
-seconds=Math.max(0,Math.ceil(seconds));
-return String(Math.floor(seconds/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0");
+function timerRemaining(){
+if(state.timerRunning&&state.timerEnd){
+return Math.max(0,Math.ceil((state.timerEnd-Date.now())/1000));
 }
-function remaining(){
-return state.timerRunning&&state.timerEnd?Math.max(0,Math.ceil((state.timerEnd-Date.now())/1000)):state.timerRemaining;
+return state.timerSeconds;
 }
-function renderTimer(){
-$("timer").textContent=fmt(remaining());
-$("timerStatus").textContent=remaining()===0?"Session complete!":state.timerRunning?"Stay focused. You've got this.":state.timerRemaining<1500?"Timer paused.":"Ready when you are.";
+function showTimer(){
+const sec=timerRemaining();
+$("timer").textContent=String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0");
+$("timerStatus").textContent=sec===0?"Session complete!":state.timerRunning?"Focus on one thing. You've got this.":sec<1500?"Timer paused.":"Ready for your first session?";
 }
-function stopInterval(){
-if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
+function stopClock(){
+if(interval){clearInterval(interval);interval=null;}
 }
-function timerTick(){
+function tick(){
 if(!state.timerRunning)return;
-const n=remaining();
-state.timerRemaining=n;
-if(n<=0){
-state.timerRemaining=0;state.timerRunning=false;state.timerEnd=0;
-stopInterval();save();renderTimer();
+state.timerSeconds=timerRemaining();
+if(state.timerSeconds<=0){
+state.timerSeconds=0;
+state.timerRunning=false;
+state.timerEnd=0;
+stopClock();
 if(!state.missions.focus){
-state.missions.focus=true;changeXP(20);renderAll();
-toast("Focus mission completed! +20 XP");
+state.missions.focus=true;
+award(20);
+renderLists();
+notify("Focus mission complete! +20 XP 🎉");
+}else{
+save();
+notify("Focus session complete! Great work.");
 }
-try{if(navigator.vibrate)navigator.vibrate([150,80,150]);}catch(e){}
-return;
+}else if(state.timerSeconds%5===0){
+save();
 }
-renderTimer();
+showTimer();
 }
 function startTimer(){
 if(state.timerRunning)return;
-if(state.timerRemaining<=0)state.timerRemaining=1500;
-state.timerEnd=Date.now()+state.timerRemaining*1000;
+if(state.timerSeconds<=0)state.timerSeconds=1500;
+state.timerEnd=Date.now()+state.timerSeconds*1000;
 state.timerRunning=true;
-stopInterval();timerInterval=setInterval(timerTick,500);
-save();renderTimer();
+stopClock();
+interval=setInterval(tick,500);
+save();
+showTimer();
 }
 function pauseTimer(){
 if(!state.timerRunning)return;
-state.timerRemaining=remaining();state.timerRunning=false;state.timerEnd=0;
-stopInterval();save();renderTimer();
+state.timerSeconds=timerRemaining();
+state.timerRunning=false;
+state.timerEnd=0;
+stopClock();
+save();
+showTimer();
 }
 function resetTimer(){
-state.timerRunning=false;state.timerEnd=0;state.timerRemaining=1500;
-stopInterval();save();renderTimer();
+state.timerRunning=false;
+state.timerEnd=0;
+state.timerSeconds=1500;
+stopClock();
+save();
+showTimer();
 }
-$("startTimer").addEventListener("click",startTimer);
-$("pauseTimer").addEventListener("click",pauseTimer);
-$("resetTimer").addEventListener("click",resetTimer);
+$("start").addEventListener("click",startTimer);
+$("pause").addEventListener("click",pauseTimer);
+$("reset").addEventListener("click",resetTimer);
 
 $("saveGoal").addEventListener("click",()=>{
-const v=Number($("screenGoal").value);
-if(!Number.isFinite(v)||v<1||v>1440){
-$("goalStatus").textContent="Enter a goal between 1 and 1440 minutes.";return;
+const n=Number($("goalInput").value);
+if(!Number.isFinite(n)||n<1||n>1440){
+$("goalStatus").textContent="Enter a number from 1 to 1440.";
+return;
 }
-goal=Math.round(v);save();
-$("goalStatus").textContent="Daily goal saved: "+goal+" minutes.";
-toast("Goal saved");
+state.goal=Math.round(n);
+save();
+$("goalStatus").textContent="Goal saved: "+state.goal+" minutes per day.";
+notify("Digital balance goal saved!");
 });
-
-function renderReminder(){
-$("reminderTime").value=reminderTime;
-$("reminderStatus").textContent=remindersEnabled?"Reminder enabled for "+reminderTime+". Keep RESET open for in-page reminders.":"Reminders are off.";
-}
-$("enableReminders").addEventListener("click",async()=>{
-const time=$("reminderTime").value.trim();
-if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(time)){
-$("reminderStatus").textContent="Enter a valid time such as 20:00.";return;
-}
-reminderTime=time;
-if("Notification" in window){
-try{
-const permission=await Notification.requestPermission();
-if(permission!=="granted"){
-remindersEnabled=false;save();renderReminder();
-$("reminderStatus").textContent="Time saved, but notification permission was not granted.";return;
-}
-}catch(e){}
-}
-remindersEnabled=true;save();renderReminder();toast("Reminder preference saved");
-});
-$("disableReminders").addEventListener("click",()=>{
-remindersEnabled=false;save();renderReminder();
-});
-function checkReminder(){
-if(!remindersEnabled)return;
-const now=new Date();
-const current=String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");
-const stamp=todayKey()+"-"+current;
-if(current===reminderTime&&localStorage.getItem("resetReminderLast")!==stamp){
-localStorage.setItem("resetReminderLast",stamp);
-if("Notification" in window&&Notification.permission==="granted"){
-try{new Notification("RESET",{body:"Take a moment to check in with your goals."});}catch(e){}
-}else toast("RESET reminder: check in with your goals.");
-}
-}
-setInterval(checkReminder,20000);
 
 $("newQuote").addEventListener("click",()=>{
 const current=$("quote").textContent;
-let next=current;
-while(next===current&&quotes.length>1)next=quotes[Math.floor(Math.random()*quotes.length)];
-$("quote").textContent=next;
+const options=thoughts.filter(t=>t!==current);
+$("quote").textContent=options[Math.floor(Math.random()*options.length)];
 });
 
-function renderTutorial(){
-const s=steps[tutorialIndex];
-$("tutorialEmoji").textContent=s.emoji;
-$("tutorialTitle").textContent=s.title;
-$("tutorialText").textContent=s.text;
-$("tutorialStep").textContent="RESET GUIDE · STEP "+(tutorialIndex+1)+" OF "+steps.length;
-$("tutorialProgress").replaceChildren();
-steps.forEach((_,i)=>{
-const bar=document.createElement("span");
-if(i<=tutorialIndex)bar.className="active";
-$("tutorialProgress").append(bar);
-});
-$("backTutorial").style.display=tutorialIndex===0?"none":"inline-block";
-$("nextTutorial").textContent=tutorialIndex===steps.length-1?"Finish":"Next";
+function showGuide(){
+guideIndex=0;
+renderGuide();
+$("guide").classList.add("show");
 }
-function openTutorial(){
-tutorialIndex=0;renderTutorial();$("tutorialOverlay").classList.add("show");
+function closeGuide(){
+$("guide").classList.remove("show");
+try{localStorage.setItem(TUTORIAL,"yes");}catch(e){}
 }
-function closeTutorial(){
-$("tutorialOverlay").classList.remove("show");
-try{localStorage.setItem(TUTORIAL_KEY,"yes");}catch(e){}
+function renderGuide(){
+const s=guideSteps[guideIndex];
+$("guideEmoji").textContent=s[0];
+$("guideTitle").textContent=s[1];
+$("guideText").textContent=s[2];
+$("guideStep").textContent="STARTER GUIDE · "+(guideIndex+1)+" OF "+guideSteps.length;
+$("guideDots").replaceChildren();
+guideSteps.forEach((_,i)=>{
+const dot=document.createElement("span");
+if(i<=guideIndex)dot.className="active";
+$("guideDots").append(dot);
+});
+$("guideBack").style.display=guideIndex===0?"none":"block";
+$("guideNext").textContent=guideIndex===guideSteps.length-1?"Finish":"Next";
 }
-$("headerHelp").addEventListener("click",openTutorial);
-$("helpButton").addEventListener("click",openTutorial);
-$("skipTutorial").addEventListener("click",closeTutorial);
-$("backTutorial").addEventListener("click",()=>{
-if(tutorialIndex>0){tutorialIndex--;renderTutorial();}
+$("helpTop").addEventListener("click",showGuide);
+$("helpButton").addEventListener("click",showGuide);
+$("guideClose").addEventListener("click",closeGuide);
+$("guideBack").addEventListener("click",()=>{
+if(guideIndex>0){guideIndex--;renderGuide();}
 });
-$("nextTutorial").addEventListener("click",()=>{
-if(tutorialIndex<steps.length-1){tutorialIndex++;renderTutorial();}
-else closeTutorial();
+$("guideNext").addEventListener("click",()=>{
+if(guideIndex<guideSteps.length-1){guideIndex++;renderGuide();}
+else closeGuide();
 });
-$("tutorialOverlay").addEventListener("click",e=>{
-if(e.target===$("tutorialOverlay"))closeTutorial();
+$("guide").addEventListener("click",e=>{
+if(e.target===$("guide"))closeGuide();
 });
 document.addEventListener("keydown",e=>{
-if(e.key==="Escape")closeTutorial();
+if(e.key==="Escape")closeGuide();
 });
 
-$("exportData").addEventListener("click",()=>{
+$("backup").addEventListener("click",()=>{
 try{
-const backup={state,goal,reminderTime,remindersEnabled,exportedAt:new Date().toISOString()};
-const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
-con
+save();
+const blob=new Blob([JSON.stringify({app:"RESET",state},null,2)],{type:"application/json"});
+const url=URL.createObjectURL(blob);
+const a=document.createElement("a");
+a.href=url;a.download="RESET-backup.json";
+document.body.append(a);a.click();a.remove();
+setTimeout(()=>URL.revokeObjectURL(url),1000);
+notify("Backup downloaded!");
+}catch(e){notify("Backup could not be created.");}
+});
+$("restore").addEventListener("click",()=>$("backupFile").click());
+$("backupFile").addEventListener("change",async e=>{
+const file=e.target.files&&e.target.files[0];
+if(!file)return;
+try{
+const data=JSON.parse(await file.text());
+const incoming=data.state||data;
+if(!incoming||typeof incoming!=="object"||!Number.isFinite(Number(incoming.xp)))throw Error("Invalid");
+if(!confirm("Replace your current progress with this backup?"))return;
+state={...freshState(),...incoming};
+state.xp=Math.max(0,Number(state.xp)||0);
+state.missions={...emptyChecks(missions),...(state.missions||{})};
+state.habits={...emptyChecks(habits),...(state.habits||{})};
+state.goal=Math.max(1,Math.min(1440,Number(state.goal)||120));
+if(state.timerRunning){
+state.timerSeconds=timerRemaining();
+state.timerRunning=false;
+state.timerEnd=0;
+}
+newDayCheck();
+save();render();showTimer();
+notify("Progress restored!");
+}catch(err){
+alert("That file is not a valid RESET backup.");
+}finally{
+e.target.value="";
+}
+});
+
+function init(){
+load();
+newDayCheck();
+$("dateText").textContent=new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+render();
+if(state.timerRunning){
+state.timerSeconds=timerRemaining();
+if(state.timerSeconds<=0){
+state.timerSeconds=0;
+state.timerRunning=false;
+state.timerEnd=0;
+}else{
+interval=setInterval(tick,500);
+}
+}
+showTimer();
+save();
+try{
+if(!localS
