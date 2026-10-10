@@ -5,56 +5,305 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080d18">
 <title>RESET — Take Back Control</title>
+
 <style>
-:root{--bg:#080d18;--panel:#111a2b;--panel2:#19263b;--green:#45f0a5;--blue:#66a8ff;--text:#f2f6ff;--muted:#98a8c0;--border:#29374e}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-header{padding:23px 18px;background:#0b1220;border-bottom:1px solid var(--border)}
-.wrap{width:min(1000px,100%);margin:auto}
-.logo{font-size:28px;font-weight:900;letter-spacing:3px;color:var(--green)}
-.tagline,.muted{color:var(--muted)}
-.tagline{font-size:13px;margin-top:6px}
-main{padding:22px 16px 40px}
-h1{font-size:clamp(27px,5vw,38px);margin:12px 0}
-h2{font-size:19px;margin:0 0 14px}
-p{line-height:1.5}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:20px}
-.card{min-width:0;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:19px}
-.full{grid-column:1/-1}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:20px}
-.stat{text-align:center;background:var(--panel2);padding:15px 5px;border-radius:12px}
-.num{display:block;font-size:25px;font-weight:800;color:var(--green)}
-.stat small{display:block;margin-top:6px;color:var(--muted);font-size:11px}
-.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.progress{height:9px;background:#29374e;border-radius:10px;overflow:hidden;margin:12px 0}
-.bar{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--blue));transition:width .2s}
-button{background:var(--green);color:#07150f;border:0;border-radius:9px;padding:12px 15px;font-weight:700;cursor:pointer}
-button.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--border)}
-button:focus-visible,input:focus-visible{outline:2px solid var(--green);outline-offset:3px}
-button:disabled{opacity:.5;cursor:not-allowed}
-.mission,.habit{display:flex;align-items:center;gap:11px;padding:13px 0;border-bottom:1px solid var(--border);cursor:pointer}
-.mission:last-child,.habit:last-child{border-bottom:0}
-.mission input,.habit input{width:19px;height:19px;flex-shrink:0;accent-color:var(--green);cursor:pointer}
-.item{flex:1;min-width:0;font-size:14px;font-weight:600}
-.sub{font-size:12px;color:var(--muted);margin-top:5px;font-weight:400}
-.reward{font-size:12px;color:var(--green);white-space:nowrap}
-.done .item{text-decoration:line-through;color:var(--muted)}
-.timer{font-size:clamp(48px,11vw,68px);font-weight:900;text-align:center;margin:20px 0;font-variant-numeric:tabular-nums}
-.timerbuttons{display:flex;gap:8px;flex-wrap:wrap}
-.timerbuttons button{flex:1}
-.quote{font-size:17px;color:var(--green);font-weight:bold;line-height:1.6}
-input[type=number],input[type=text]{width:100%;background:#0a1220;color:var(--text);border:1px solid var(--border);border-radius:9px;padding:12px;margin:9px 0 12px}
-.small{font-size:12px}
-.notice{font-size:12px;color:var(--muted);line-height:1.6}
-footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
-@media(max-width:600px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.stats{gap:6px}.num{font-size:22px}}
+:root {
+  --bg: #080d18;
+  --panel: #111a2b;
+  --panel2: #19263b;
+  --green: #45f0a5;
+  --blue: #66a8ff;
+  --text: #f2f6ff;
+  --muted: #98a8c0;
+  --border: #29374e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  padding: 23px 18px;
+  background: #0b1220;
+  border-bottom: 1px solid var(--border);
+}
+
+.wrap { width: min(1000px, 100%); margin: auto; }
+
+.logo {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: var(--green);
+}
+
+.tagline, .muted { color: var(--muted); }
+.tagline { font-size: 13px; margin-top: 6px; }
+
+main { padding: 22px 16px 40px; }
+
+h1 { font-size: clamp(27px, 5vw, 38px); margin: 12px 0; }
+h2 { font-size: 19px; margin: 0 0 14px; }
+p { line-height: 1.5; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card {
+  min-width: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 19px;
+}
+
+.full { grid-column: 1 / -1; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.stat {
+  text-align: center;
+  background: var(--panel2);
+  padding: 15px 5px;
+  border-radius: 12px;
+}
+
+.num {
+  display: block;
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--green);
+}
+
+.stat small {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.progress {
+  height: 9px;
+  background: #29374e;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--green), var(--blue));
+  transition: width .2s;
+}
+
+button {
+  background: var(--green);
+  color: #07150f;
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: var(--panel2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+button:disabled { opacity: .5; cursor: not-allowed; }
+
+.mission, .habit {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.mission:last-child, .habit:last-child { border-bottom: 0; }
+
+.mission input, .habit input {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  accent-color: var(--green);
+  cursor: pointer;
+}
+
+.item { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; }
+.sub { font-size: 12px; color: var(--muted); margin-top: 5px; font-weight: 400; }
+.reward { font-size: 12px; color: var(--green); white-space: nowrap; }
+.done .item { text-decoration: line-through; color: var(--muted); }
+
+.timer {
+  font-size: clamp(48px, 11vw, 68px);
+  font-weight: 900;
+  text-align: center;
+  margin: 20px 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.timerbuttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.timerbuttons button { flex: 1; }
+.quote { font-size: 17px; color: var(--green); font-weight: bold; line-height: 1.6; }
+
+input[type=number], input[type=text] {
+  width: 100%;
+  background: #0a1220;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 12px;
+  margin: 9px 0 12px;
+}
+
+.small { font-size: 12px; }
+.notice { font-size: 12px; color: var(--muted); line-height: 1.6; }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px; }
+
+/* Tutorial Help button */
+.help-button {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 900;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 25px;
+  box-shadow: 0 5px 22px #0008;
+}
+
+/* Tutorial overlay */
+.tutorial-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, .82);
+}
+
+.tutorial-overlay.open { display: flex; }
+
+.tutorial-box {
+  width: min(460px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 20px 70px #0009;
+}
+
+.tutorial-brand {
+  color: var(--green);
+  font-weight: 900;
+  letter-spacing: 3px;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.tutorial-icon {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.tutorial-box h2 {
+  font-size: 24px;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.tutorial-box p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.tutorial-progress {
+  height: 6px;
+  background: var(--panel2);
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 22px 0 9px;
+}
+
+.tutorial-progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--green), var(--blue));
+  transition: width .2s;
+}
+
+.tutorial-step-label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.tutorial-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 23px;
+}
+
+.tutorial-actions button { flex: 1; min-width: 75px; }
+.tutorial-actions .skip-button { flex-basis: 100%; }
+
+@media(max-width:600px) {
+  .grid { grid-template-columns: 1fr; }
+  .full { grid-column: auto; }
+  .stats { gap: 6px; }
+  .num { font-size: 22px; }
+  .tutorial-box { padding: 21px; }
+}
 </style>
 </head>
+
 <body>
-<header><div class="wrap">
-  <div class="logo">RESET<span style="color:white">.</span></div>
-  <div class="tagline">Break the cycle. Rebuild yourself. Take back control.</div>
-</div></header>
+
+<header>
+  <div class="wrap">
+    <div class="logo">RESET<span style="color:white">.</span></div>
+    <div class="tagline">Break the cycle. Rebuild yourself. Take back control.</div>
+  </div>
+</header>
 
 <main class="wrap">
   <p class="muted" id="today"></p>
@@ -68,7 +317,10 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
   </div>
 
   <div class="card" style="margin-top:15px">
-    <div class="row"><strong id="levelLabel">Level 1</strong><span class="muted small" id="xpText">0 / 100 XP</span></div>
+    <div class="row">
+      <strong id="levelLabel">Level 1</strong>
+      <span class="muted small" id="xpText">0 / 100 XP</span>
+    </div>
     <div class="progress"><div class="bar" id="xpBar"></div></div>
     <p class="muted small" id="streakMessage">Start today with one small win.</p>
   </div>
@@ -96,9 +348,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
     <section class="card">
       <div class="row"><h2>🌱 Habit Garden</h2><span class="reward" id="habitCount">0/5</span></div>
       <p class="muted small">Build good habits one day at a time.</p>
-      <div id="habits">
-        <p class="muted">Loading habits…</p>
-      </div>
+      <div id="habits"><p class="muted">Loading habits…</p></div>
       <p class="muted small" id="habitMessage">Every small action counts.</p>
     </section>
 
@@ -126,13 +376,55 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
     </section>
   </div>
 </main>
+
 <footer>RESET © 2026 · Progress, not perfection.</footer>
+
+<!-- Always-available tutorial button -->
+<button
+  class="help-button"
+  id="helpButton"
+  type="button"
+  aria-label="Open RESET tutorial"
+  title="Help and tutorial"
+  onclick="openTutorial()"
+>?</button>
+
+<!-- Tutorial popup -->
+<div
+  class="tutorial-overlay"
+  id="tutorialOverlay"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="tutorialTitle"
+  aria-describedby="tutorialDescription"
+>
+  <div class="tutorial-box">
+    <div class="tutorial-brand">RESET · GETTING STARTED</div>
+    <div class="tutorial-icon" id="tutorialIcon">🌱</div>
+    <h2 id="tutorialTitle">Welcome to RESET!</h2>
+    <p id="tutorialDescription"></p>
+
+    <div class="tutorial-progress">
+      <div class="tutorial-progress-fill" id="tutorialProgressFill"></div>
+    </div>
+    <div class="tutorial-step-label" id="tutorialStepLabel">Step 1 of 6</div>
+
+    <div class="tutorial-actions">
+      <button class="secondary" id="tutorialBack" type="button" onclick="previousTutorialStep()">Back</button>
+      <button id="tutorialNext" type="button" onclick="nextTutorialStep()">Next</button>
+      <button class="secondary skip-button" type="button" onclick="closeTutorial()">Skip tutorial</button>
+    </div>
+  </div>
+</div>
 
 <script>
 "use strict";
 
 const KEY = "resetV2";
 const LIMIT_KEY = "resetV2Limit";
+
+/* Tutorial settings use their own key so existing progress is preserved. */
+const TUTORIAL_KEY = "resetTutorialCompletedV1";
 
 const missionList = [
   {id:"focus",title:"Complete one focus session",sub:"Focus for 25 minutes",xp:20},
@@ -157,321 +449,294 @@ const quotes = [
   "Focus on what you can do today, not everything at once."
 ];
 
-function dayKey(date=new Date()){
+/* Six tutorial lessons */
+const tutorialSteps = [
+  {
+    icon: "👋",
+    title: "Welcome to RESET!",
+    description: "RESET helps you build useful habits, focus on your goals, and make steady progress. You don't need to change everything at once. Start with one small win."
+  },
+  {
+    icon: "📊",
+    title: "Your dashboard",
+    description: "Your dashboard shows your day streak, total XP, current level, and progress toward your next level. XP is earned by completing habits and missions."
+  },
+  {
+    icon: "🎯",
+    title: "Daily Missions",
+    description: "You have four daily missions. Complete activities such as focusing, moving, learning, and reflecting to earn XP. Your daily missions refresh when the date changes."
+  },
+  {
+    icon: "🌱",
+    title: "Habit Garden",
+    description: "Tick a habit when you complete it. Each completed habit adds 5 XP. Unticking it removes those 5 XP, so only keep it checked when it is completed."
+  },
+  {
+    icon: "⏱️",
+    title: "Focus Timer",
+    description: "Use the 25-minute timer to give one task your attention. Press Start to begin, Pause to take a break, or Reset to start again. Completing the focus session can complete its matching mission and award XP."
+  },
+  {
+    icon: "🏆",
+    title: "Keep growing",
+    description: "Earn XP, progress through levels, and build your day streak by returning consistently. Digital Balance lets you save a screen-time intention, and Your Progress lets you export a copy of your progress. Your progress is stored in this browser on this device."
+  }
+];
+
+let tutorialIndex = 0;
+let tutorialOpen = false;
+
+function openTutorial() {
+  tutorialIndex = 0;
+  tutorialOpen = true;
+
+  const overlay = document.getElementById("tutorialOverlay");
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+
+  renderTutorialStep();
+
+  const nextButton = document.getElementById("tutorialNext");
+  nextButton.focus();
+}
+
+function closeTutorial() {
+  tutorialOpen = false;
+
+  document.getElementById("tutorialOverlay").classList.remove("open");
+  document.body.style.overflow = "";
+
+  try {
+    localStorage.setItem(TUTORIAL_KEY, "true");
+  } catch (error) {
+    console.warn("Could not save tutorial setting.", error);
+  }
+
+  document.getElementById("helpButton").focus();
+}
+
+function renderTutorialStep() {
+  const step = tutorialSteps[tutorialIndex];
+
+  document.getElementById("tutorialIcon").textContent = step.icon;
+  document.getElementById("tutorialTitle").textContent = step.title;
+  document.getElementById("tutorialDescription").textContent = step.description;
+  document.getElementById("tutorialStepLabel").textContent =
+    "Step " + (tutorialIndex + 1) + " of " + tutorialSteps.length;
+
+  document.getElementById("tutorialProgressFill").style.width =
+    ((tutorialIndex + 1) / tutorialSteps.length * 100) + "%";
+
+  const backButton = document.getElementById("tutorialBack");
+  const nextButton = document.getElementById("tutorialNext");
+
+  backButton.disabled = tutorialIndex === 0;
+
+  if (tutorialIndex === tutorialSteps.length - 1) {
+    nextButton.textContent = "Finish";
+  } else {
+    nextButton.textContent = "Next";
+  }
+}
+
+function nextTutorialStep() {
+  if (tutorialIndex < tutorialSteps.length - 1) {
+    tutorialIndex++;
+    renderTutorialStep();
+  } else {
+    closeTutorial();
+  }
+}
+
+function previousTutorialStep() {
+  if (tutorialIndex > 0) {
+    tutorialIndex--;
+    renderTutorialStep();
+  }
+}
+
+/* Close tutorial with Escape; arrow between lessons with buttons. */
+document.addEventListener("keydown", function(event) {
+  if (!tutorialOpen) return;
+
+  if (event.key === "Escape") {
+    closeTutorial();
+  }
+});
+
+/* Show the tutorial automatically to first-time visitors. */
+function startFirstVisitTutorial() {
+  try {
+    if (localStorage.getItem(TUTORIAL_KEY) !== "true") {
+      openTutorial();
+    }
+  } catch (error) {
+    console.warn("Tutorial preference could not be read.", error);
+  }
+}
+
+function dayKey(date = new Date()) {
   return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
 }
-function yesterdayKey(key){
-  const [y,m,d]=key.split("-").map(Number);
-  const date=new Date(y,m-1,d);
+
+function yesterdayKey(key) {
+  const [y,m,d] = key.split("-").map(Number);
+  const date = new Date(y,m-1,d);
   date.setDate(date.getDate()-1);
   return dayKey(date);
 }
-function freshDay(){
+
+function freshDay() {
   return {missions:{},habits:{}};
 }
-function loadState(){
-  try{
-    const s=JSON.parse(localStorage.getItem(KEY));
-    if(s && typeof s==="object") return s;
-  }catch(e){console.warn("RESET storage could not be read.",e);}
-  return {day:dayKey(),xp:0,missions:{},habits:{},lastDay:"",streak:0};
+
+function loadState() {
+  try {
+    const s = JSON.parse(localStorage.getItem(KEY));
+    if (s && typeof s === "object") return s;
+  } catch(e) {
+    console.warn("RESET storage could not be read.", e);
+  }
+
+  return {
+    day:dayKey(),
+    xp:0,
+    missions:{},
+    habits:{},
+    lastDay:"",
+    streak:0
+  };
 }
 
-let state=loadState();
-let today=dayKey();
-let timerSeconds=1500;
-let timerInterval=null;
-let timerRunning=false;
-let focusAwarded=false;
+let state = loadState();
+let today = dayKey();
+let timerSeconds = 1500;
+let timerInterval = null;
+let timerRunning = false;
+let focusAwarded = false;
 
-function saveState(){
-  try{
-    localStorage.setItem(KEY,JSON.stringify(state));
+function saveState() {
+  try {
+    localStorage.setItem(KEY, JSON.stringify(state));
     return true;
-  }catch(e){
+  } catch(e) {
     console.error(e);
     return false;
   }
 }
 
-function checkDay(){
-  today=dayKey();
+function checkDay() {
+  today = dayKey();
 
-  if(state.lastDay!==today){
-    state.streak=state.lastDay===yesterdayKey(today)
-      ? Math.max(0,Number(state.streak)||0)+1 : 1;
-    state.lastDay=today;
+  if (state.lastDay !== today) {
+    state.streak = state.lastDay === yesterdayKey(today)
+      ? Math.max(0, Number(state.streak) || 0) + 1
+      : 1;
+    state.lastDay = today;
   }
 
-  if(state.day!==today){
-    state.day=today;
-    const fresh=freshDay();
-    state.missions=fresh.missions;
-    state.habits=fresh.habits;
+  if (state.day !== today) {
+    state.day = today;
+    const fresh = freshDay();
+    state.missions = fresh.missions;
+    state.habits = fresh.habits;
   }
 
-  if(!state.missions || typeof state.missions!=="object") state.missions={};
-  if(!state.habits || typeof state.habits!=="object") state.habits={};
-  state.xp=Math.max(0,Number(state.xp)||0);
-  state.streak=Math.max(0,Number(state.streak)||0);
+  if (!state.missions || typeof state.missions !== "object") {
+    state.missions = {};
+  }
+
+  if (!state.habits || typeof state.habits !== "object") {
+    state.habits = {};
+  }
+
+  state.xp = Math.max(0, Number(state.xp) || 0);
+  state.streak = Math.max(0, Number(state.streak) || 0);
   saveState();
 }
 
-function awardXP(amount){
-  state.xp=Math.max(0,state.xp+amount);
+function awardXP(amount) {
+  state.xp = Math.max(0, state.xp + amount);
   saveState();
 }
 
-function renderStats(){
-  const level=Math.floor(state.xp/100)+1;
-  const progress=state.xp%100;
-  document.getElementById("streak").textContent=state.streak+" 🔥";
-  document.getElementById("xp").textContent=state.xp;
-  document.getElementById("level").textContent=level;
-  document.getElementById("levelLabel").textContent="Level "+level;
-  document.getElementById("xpText").textContent=progress+" / 100 XP";
-  document.getElementById("xpBar").style.width=progress+"%";
+function renderStats() {
+  const level = Math.floor(state.xp / 100) + 1;
+  const progress = state.xp % 100;
 
-  let msg="Start today with one small win.";
-  if(state.streak>=2) msg="You're building consistency. Keep going!";
-  if(state.streak>=7) msg="One week of showing up. Keep building!";
-  if(state.streak>=30) msg="Amazing consistency. Keep looking after yourself!";
-  document.getElementById("streakMessage").textContent=msg;
+  document.getElementById("streak").textContent = state.streak + " 🔥";
+  document.getElementById("xp").textContent = state.xp;
+  document.getElementById("level").textContent = level;
+  document.getElementById("levelLabel").textContent = "Level " + level;
+  document.getElementById("xpText").textContent = progress + " / 100 XP";
+  document.getElementById("xpBar").style.width = progress + "%";
 
-  const mc=missionList.filter(x=>state.missions[x.id]).length;
-  const hc=habitList.filter(x=>state.habits[x.id]).length;
-  document.getElementById("progressSummary").textContent=
+  let msg = "Start today with one small win.";
+  if (state.streak >= 2) msg = "You're building consistency. Keep going!";
+  if (state.streak >= 7) msg = "One week of showing up. Keep building!";
+  if (state.streak >= 30) msg = "Amazing consistency. Keep looking after yourself!";
+
+  document.getElementById("streakMessage").textContent = msg;
+
+  const mc = missionList.filter(x => state.missions[x.id]).length;
+  const hc = habitList.filter(x => state.habits[x.id]).length;
+
+  document.getElementById("progressSummary").textContent =
     `Today: ${mc}/${missionList.length} missions and ${hc}/${habitList.length} habits completed. Total XP: ${state.xp}.`;
 }
 
-/* Habit Garden: render into the matching #habits container. */
-function renderHabits(){
-  const container=document.getElementById("habits");
-  if(!container) return;
+function renderHabits() {
+  const container = document.getElementById("habits");
+  if (!container) return;
+
   container.replaceChildren();
 
-  habitList.forEach(habit=>{
-    const done=Boolean(state.habits[habit.id]);
-    const label=document.createElement("label");
-    label.className="habit"+(done?" done":"");
+  habitList.forEach(habit => {
+    const done = Boolean(state.habits[habit.id]);
+    const label = document.createElement("label");
+    label.className = "habit" + (done ? " done" : "");
 
-    const checkbox=document.createElement("input");
-    checkbox.type="checkbox";
-    checkbox.checked=done;
-    checkbox.setAttribute("aria-label",habit.title);
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = done;
+    checkbox.setAttribute("aria-label", habit.title);
 
-    checkbox.addEventListener("change",()=>{
-      const wasDone=Boolean(state.habits[habit.id]);
-      const nowDone=checkbox.checked;
-      if(wasDone===nowDone) return;
+    checkbox.addEventListener("change", () => {
+      const wasDone = Boolean(state.habits[habit.id]);
+      const nowDone = checkbox.checked;
 
-      state.habits[habit.id]=nowDone;
-      awardXP(nowDone?5:-5);
+      if (wasDone === nowDone) return;
+
+      state.habits[habit.id] = nowDone;
+      awardXP(nowDone ? 5 : -5);
       renderAll();
     });
 
-    const text=document.createElement("span");
-    text.className="item";
-    text.textContent=habit.title;
+    const text = document.createElement("span");
+    text.className = "item";
+    text.textContent = habit.title;
 
-    label.append(checkbox,text);
+    label.append(checkbox, text);
     container.appendChild(label);
   });
 
-  const count=habitList.filter(h=>state.habits[h.id]).length;
-  const countEl=document.getElementById("habitCount");
-  if(countEl) countEl.textContent=count+"/"+habitList.length;
+  const count = habitList.filter(h => state.habits[h.id]).length;
+  const countEl = document.getElementById("habitCount");
+  if (countEl) countEl.textContent = count + "/" + habitList.length;
 
-  const message=document.getElementById("habitMessage");
-  if(message){
-    message.textContent=count===habitList.length
-      ?"All habits checked off today. Great work!":"Every small action counts.";
+  const message = document.getElementById("habitMessage");
+  if (message) {
+    message.textContent = count === habitList.length
+      ? "All habits checked off today. Great work!"
+      : "Every small action counts.";
   }
 }
 
-function renderMissions(){
-  const container=document.getElementById("missions");
-  if(!container) return;
+function renderMissions() {
+  const container = document.getElementById("missions");
+  if (!container) return;
+
   container.replaceChildren();
 
-  missionList.forEach(mission=>{
-    const done=Boolean(state.missions[mission.id]);
-    const label=document.createElement("label");
-    label.className="mission"+(done?" done":"");
-
-    const checkbox=document.createElement("input");
-    checkbox.type="checkbox";
-    checkbox.checked=done;
-    checkbox.setAttribute("aria-label",mission.title);
-
-    checkbox.addEventListener("change",()=>{
-      const wasDone=Boolean(state.missions[mission.id]);
-      const nowDone=checkbox.checked;
-      if(wasDone===nowDone) return;
-
-      state.missions[mission.id]=nowDone;
-      awardXP(nowDone?mission.xp:-mission.xp);
-      renderAll();
-    });
-
-    const text=document.createElement("div");
-    text.className="item";
-
-    const title=document.createElement("div");
-    title.textContent=mission.title;
-
-    const sub=document.createElement("div");
-    sub.className="sub";
-    sub.textContent=mission.sub;
-
-    text.append(title,sub);
-
-    const reward=document.createElement("span");
-    reward.className="reward";
-    reward.textContent="+"+mission.xp+" XP";
-
-    label.append(checkbox,text,reward);
-    container.appendChild(label);
-  });
-
-  const count=missionList.filter(m=>state.missions[m.id]).length;
-  document.getElementById("missionCount").textContent=count+"/"+missionList.length;
-}
-
-function renderAll(){
-  renderStats();
-  renderMissions();
-  renderHabits();
-}
-
-function updateDate(){
-  document.getElementById("today").textContent=
-    new Date().toLocaleDateString(undefined,{
-      weekday:"long",year:"numeric",month:"long",day:"numeric"
-    });
-}
-
-function drawTimer(){
-  const min=Math.floor(timerSeconds/60);
-  const sec=timerSeconds%60;
-  document.getElementById("timer").textContent=
-    String(min).padStart(2,"0")+":"+String(sec).padStart(2,"0");
-  document.getElementById("timerBar").style.width=
-    ((1500-timerSeconds)/1500*100)+"%";
-  document.getElementById("startBtn").textContent=
-    timerRunning?"Running...":"Start";
-}
-
-function startTimer(){
-  if(timerRunning) return;
-  if(timerSeconds<=0){timerSeconds=1500;focusAwarded=false;}
-  timerRunning=true;
-  document.getElementById("timerMessage").textContent="Focus on one thing. You've got this!";
-  drawTimer();
-
-  timerInterval=setInterval(()=>{
-    timerSeconds--;
-    drawTimer();
-
-    if(timerSeconds<=0){
-      clearInterval(timerInterval);
-      timerInterval=null;
-      timerRunning=false;
-      document.getElementById("timerMessage").textContent="Session complete! Take a short break. 🎉";
-
-      if(!focusAwarded){
-        focusAwarded=true;
-        if(!state.missions.focus){
-          state.missions.focus=true;
-          awardXP(20);
-        }
-        renderAll();
-      }
-      drawTimer();
-    }
-  },1000);
-}
-
-function pauseTimer(){
-  if(timerInterval) clearInterval(timerInterval);
-  timerInterval=null;
-  timerRunning=false;
-  document.getElementById("timerMessage").textContent="Paused. Resume when you're ready.";
-  drawTimer();
-}
-function resetTimer(){
-  if(timerInterval) clearInterval(timerInterval);
-  timerInterval=null;
-  timerRunning=false;
-  timerSeconds=1500;
-  focusAwarded=false;
-  document.getElementById("timerMessage").textContent="25 minutes. One goal. No distractions.";
-  drawTimer();
-}
-
-function saveScreenGoal(){
-  const value=Number(document.getElementById("screenGoal").value);
-  const message=document.getElementById("screenMessage");
-
-  if(!Number.isInteger(value)||value<1||value>1440){
-    message.textContent="Enter a number between 1 and 1440 minutes.";
-    return;
-  }
-  try{
-    localStorage.setItem(LIMIT_KEY,String(value));
-    message.textContent="Daily intention saved: "+value+" minutes.";
-  }catch(e){
-    message.textContent="Could not save the goal in this browser.";
-  }
-}
-
-function loadScreenGoal(){
-  try{
-    const value=Number(localStorage.getItem(LIMIT_KEY));
-    if(value>0&&value<=1440){
-      document.getElementById("screenGoal").value=value;
-      document.getElementById("screenMessage").textContent=
-        "Your current daily intention is "+value+" minutes.";
-    }
-  }catch(e){console.warn(e);}
-}
-
-function newQuote(){
-  document.getElementById("quote").textContent=
-    "“"+quotes[Math.floor(Math.random()*quotes.length)]+"”";
-}
-
-function exportProgress(){
-  const blob=new Blob([JSON.stringify({
-    exportedAt:new Date().toISOString(),progress:state
-  },null,2)],{type:"application/json"});
-
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download="reset-progress.json";
-  a.click();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-
-function handleNewDay(){
-  if(dayKey()!==today){
-    checkDay();
-    updateDate();
-    renderAll();
-  }
-}
-
-checkDay();
-updateDate();
-renderAll();
-drawTimer();
-newQuote();
-loadScreenGoal();
-setInterval(handleNewDay,30000);
-document.addEventListener("visibilitychange",()=>{
-  if(!document.hidden) handleNewDay();
-});
-</script>
-</body>
-</html>
+  missionList.forEach(mission => {
+    const done = Boolean(state.missions[m
